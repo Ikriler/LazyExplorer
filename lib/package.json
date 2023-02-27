@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "jquery": "^3.6.3"
+    "draw2d": "^1.0.38",
+    "jquery": "^3.6.3",
+    "jquery-ui": "^1.13.2"
   }
 }

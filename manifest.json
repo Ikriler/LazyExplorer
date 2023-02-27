@@ -1,14 +1,15 @@
 {
-    "manifest_version": 3,
+    "manifest_version": 2,
     "name": "Lazy explorer",
     "description": "Browser automation extension",
     "version": "1.0.0",
     "icons": {
         "64": "images/magnifying-glass-64.png"
     },
-    "action": {
+    "browser_action": {
         "default_popup": "/html/popup.html"
     },
     "permissons": ["activeTab", "scripting"],
-    "background": {}
+    "background": {},
+    "content_security_policy": "script-src 'unsafe-inline' 'unsafe-eval' 'self' blob: filesystem:"
 }
