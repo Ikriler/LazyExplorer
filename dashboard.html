@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Wildfire</title>
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/theme/css/lib/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"/>
+    <link rel="stylesheet" href="/theme/css/main.css">
+    <link rel="stylesheet" href="/theme/css/custom.css">
+</head>
+
+<body class="horizontal-navigation">
+<input id="eventfileContainer" accept=".WFIRE" type="file" style="display: none;" />
+<header class="custom-header">
+    <ul class="nav nav-inline navbar-dark nav-pills">
+        <li class="nav-item">
+            <a class="nav-link active" href="/dashboard.html">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/simulationlog.html">Simulation Log</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/eventlog.html">Event Log</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/workfloweditor.html">Workflow Editor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/settings.html">Settings</a>
+        </li>
+    </ul>
+</header>
+
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5">
+                <section>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <a href="/workfloweditor.html#launch">
+                                <section class="widget widget-simple-sm-fill green">
+                                    <div class="widget-simple-sm-icon">
+                                        <i class="font-icon font-icon-revers"></i>
+                                    </div>
+                                    <div class="widget-simple-sm-fill-caption">Start<br />Simulation</div>
+                                </section>
+                            </a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a href="/settings.html#favorites">
+                                <section class="widget widget-simple-sm-fill purple">
+                                    <div class="widget-simple-sm-icon">
+                                        <i class="font-icon font-icon-star"></i>
+                                    </div>
+                                    <div class="widget-simple-sm-fill-caption">Manage<br />Favorites</div>
+                                </section>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+
+<script src="/theme/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+<script src="/theme/js/lib/jquery/jquery.min.js"></script>
+<script src="/theme/js/lib/tether/tether.min.js"></script>
+<script src="/theme/js/lib/bootstrap/bootstrap.min.js"></script>
+<script src="/theme/js/plugins.js"></script>
+<script src="/theme/js/lib/pnotify/pnotify.js"></script>
+
+<script src="/theme/js/app.js"></script>
+<script src="/aes.js"></script>
+<script src="/dashboard.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

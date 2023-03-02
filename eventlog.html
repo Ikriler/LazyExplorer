@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Wildfire</title>
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/theme/css/lib/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"/>
+    <link rel="stylesheet" href="/theme/css/main.css">
+    <link rel="stylesheet" href="/theme/css/custom.css">
+</head>
+
+<body class="horizontal-navigation">
+<input id="eventfileContainer" accept=".WFIRE" type="file" style="display: none;" />
+
+<header class="custom-header">
+    <ul class="nav nav-inline navbar-dark nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboard.html">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/simulationlog.html">Simulation Log</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/eventlog.html">Event Log</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/workfloweditor.html">Workflow Editor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/settings.html">Settings</a>
+        </li>
+    </ul>
+</header>
+
+<div>
+    <div class="container-fluid">
+        <section class="box-typical">
+            <header class="box-typical-header">
+                <div class="tbl-row">
+                    <div class="tbl-cell tbl-cell-title">
+                        <h3>Event Log</h3>
+                    </div>
+                    <div class="tbl-cell tbl-cell-action-bordered">
+                        <button id="downloadEventLogButton" type="button" class="action-btn"><i class="font-icon font-icon-download-3"></i></button>
+                    </div>
+                    <div class="tbl-cell tbl-cell-action-bordered">
+                        <button id="deleteMultipleEvents" type="button" class="action-btn"><i class="font-icon font-icon-trash"></i></button>
+                    </div>
+                </div>
+            </header>
+            <div class="box-typical-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="table-check">
+                                <div class="checkbox checkbox-only">
+                                    <input type="checkbox" id="table-check-head">
+                                    <label for="table-check-head"></label>
+                                </div>
+                            </th>
+                            <th style="min-width: 160px;">Type</th>
+                            <th>Details</th>
+                            <!--<th>Emulated</th>-->
+                            <th colspan="3">Additional Data</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="events">
+                        <tr>
+                            <td colspan="7" class="table-check">
+                                <center>Loading events...</center>
+                                <br />
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!--.box-typical-body-->
+        </section>
+    </div><!--.container-fluid-->
+</div><!--.page-content-->
+
+<script src="/theme/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+<script src="/theme/js/lib/jquery/jquery.min.js"></script>
+<script src="/theme/js/lib/tether/tether.min.js"></script>
+<script src="/theme/js/lib/bootstrap/bootstrap.min.js"></script>
+<script src="/theme/js/plugins.js"></script>
+
+<script src="/theme/js/app.js"></script>
+<script src="/aes.js"></script>
+<script src="/log_helper.js"></script>
+<script src="/eventlog.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Wildfire</title>
+
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="/theme/css/lib/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"/>
+    <link rel="stylesheet" href="/theme/css/separate/vendor/bootstrap-select/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/theme/css/main.css">
+    <link rel="stylesheet" href="/theme/css/custom.css">
+    
+    <link rel="stylesheet" href="/enjoyhint/enjoyhint.css">
+</head>
+
+<body class="horizontal-navigation" style="background-color: #ffffff; overflow-x: hidden;">
+<input id="eventfileContainer" accept=".WFIRE" type="file" style="display: none;" />
+<input id="simfileContainer" accept=".WFSIM" type="file" style="display: none;" />
+
+<header class="custom-header">
+    <ul class="nav nav-inline navbar-dark nav-pills">
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboard.html">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/simulationlog.html">Simulation Log</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/eventlog.html">Event Log</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/workfloweditor.html">Workflow Editor</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/settings.html">Settings</a>
+        </li>
+    </ul>
+</header>
+<div id="graphParent" style="padding-left: 0px;">
+    <div id="graph"></div>
+</div>
+<div class="form-group" style="right: 20px; top: 50px; margin: 16px; position: fixed;">
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar">
+        <div class="btn-group" role="group" aria-label="Event Actions">
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Add Node" id="workflowToolbarAddNode" type="button" class="btn btn-default-outline"><i class="fa fa-plus-square-o"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Clone Selection" id="workflowToolbarClone" type="button" class="btn btn-default-outline"><i class="fa fa-copy"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Add Section" id="workflowToolbarAddSection" type="button" class="btn btn-default-outline"><i class="fa fa-object-group"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Undo" id="workflowToolbarUndo" type="button" class="btn btn-default-outline"><i class="fa fa-reply"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Redo" id="workflowToolbarRedo" type="button" class="btn btn-default-outline"><i class="fa fa-share"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Item(s)" id="workflowToolbarDelete" type="button" class="btn btn-default-outline"><i class="fa fa-trash-o"></i></button>
+        </div>
+        <div class="btn-group" role="group" aria-label="Workflow Actions">
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Start Simulation" id="workflowToolbarInitSimulation" type="button" class="btn btn-default-outline"><i class="fa fa-play-circle-o"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Favorite Workflow" id="workflowToolbarFavorite" type="button" class="btn btn-default-outline"><i class="fa fa-star"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Upload to Wildfire Cloud" style="display: none;" id="workflowToolbarCloudUpload" type="button" class="btn btn-default-outline"><i class="fa fa-cloud-upload"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Reset from Event Log" id="workflowToolbarNew" type="button" class="btn btn-default-outline"><i class="fa fa-file-o"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Import Workflow" id="workflowToolbarImport" type="button" class="btn btn-default-outline"><i class="fa fa-folder-open-o"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Export Workflow" id="workflowToolbarSave" type="button" class="btn btn-default-outline"><i class="fa fa-save"></i></button>
+            <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Generate PNG" id="workflowToolbarExportImage" type="button" class="btn btn-default-outline"><i class="fa fa-picture-o"></i></button>
+        </div>
+    </div>
+</div>
+<div style="width: 300px; position: fixed; left: 0; top: 136px;">
+    <div class="container-fluid" style="padding-top: 20px;">
+        <section id="workflowsidepanel" class="card card-default" style="display: none;">
+            <header class="card-header">
+                <span id="sidePanelTitle">Event Properties</span>
+                <button id="nodeLinkPanelX" type="button" class="modal-close">
+                    <i class="font-icon-close-2"></i>
+                </button>
+            </header>
+            <div class="card-block" style="min-height: 120px;">
+                <p class="card-text">
+                    <div id="sidePanelTypeSelectGroup">
+                        <label class="form-label semibold" for="sidePanelTypeSelect">Type</label>
+                        <select id="sidePanelTypeSelect" disabled="disabled" class="bootstrap-select">
+                        </select><br /><br />
+                    </div>
+                    <span id="sidePanelEventDetails"></span>
+                    <button id="deleteButtonSidepanel" type="button" class="btn btn-inline btn-danger">Delete</button>
+                </p>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="/theme/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+<script src="/theme/js/lib/jquery/jquery.min.js"></script>
+<script src="/theme/js/lib/tether/tether.min.js"></script>
+<script src="/theme/js/lib/bootstrap/bootstrap.min.js"></script>
+<script src="/theme/js/plugins.js"></script>
+
+<script src="/enjoyhint/enjoyhint.min.js"></script>
+
+<script src="/theme/js/app.js"></script>
+<script src="/aes.js"></script>
+
+<script src="/draw2d/lib/shifty.js"></script>
+<script src="/draw2d/lib/raphael.js"></script>
+<script src="/draw2d/jquery-ui-1.10.4.custom.js"></script>
+<script src="/draw2d/lib/jquery.autoresize.js"></script>
+<script src="/draw2d/lib/jquery-touch_punch.js"></script>
+<script src="/draw2d/lib/jquery.contextmenu.js"></script>
+<script src="/draw2d/lib/rgbcolor.js"></script>
+<script src="/draw2d/lib/canvg.js"></script>
+<script src="/draw2d/lib/Class.js"></script>
+<script src="/draw2d/lib/json2.js"></script>
+<script src="/draw2d/lib/pathfinding-browser.min.js"></script>
+<script src="/draw2d/src/draw2d.js"></script>
+
+<script src="/theme/js/lib/bootstrap-select/bootstrap-select.min.js"></script>
+
+<script src="/csvparse.js"></script>
+<script src="/log_helper.js"></script>
+<script src="/workfloweditor.js"></script>
+
+<script src="/app.js"></script>
+<script src="/workflow-simulate.js"></script>
+</body>
+</html>
