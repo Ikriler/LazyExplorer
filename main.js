@@ -24,13 +24,6 @@ var helperversion = null;
 var latestNativeScreenshot = null;
 var latestNativeScreenshotParts = [];
 
-if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) { // Opera
-    windowWidth*=window.devicePixelRatio;
-    windowHeight*=window.devicePixelRatio;
-}
-
-// Commands
-
 chrome.commands.onCommand.addListener(function(command) {
     if (command == "stop-simulation")
         terminateSimulation(false, "User terminated");
@@ -63,8 +56,6 @@ chrome.commands.onCommand.addListener(function(command) {
         });
     }
 });
-
-// Native
 
 function sendNativeMessage(message) {
     native_port.postMessage(message);
@@ -112,8 +103,6 @@ setInterval(function(){
 }, 30000);
 
 nativeConnect();
-
-// Alarms
 
 chrome.alarms.onAlarm.addListener(function(alarm){
     var name = alarm.name;
@@ -173,8 +162,6 @@ function configureAlarms() {
     });
 }
 
-////
-
 function updateTrackedTabs() {
     chrome.tabs.query({}, function (tabs) {
         tracked_tabs = tabs;
@@ -192,7 +179,6 @@ function resolveChar(str) {
 
 function resolveVariable(str) {
     var ret = eresolveVariable(String(str).replace("\\","\\\\").replace("\`","\\\`"));
-    //console.log("Resolved " + str + " to " + ret);
     return ret;
 }
 
@@ -286,7 +272,7 @@ function updateWorkflowData() {
 }
 
 function openUI(url) {
-    if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+    if (typeof InstallTrigger === 'undefined') {
         chrome.tabs.query({
             windowType: "popup"
         }, function(tabs){
@@ -350,8 +336,8 @@ chrome.tabs.onActivated.addListener(
     function (activeInfo) {
         chrome.storage.local.get('recording', function (isRecording) {
             if (isRecording.recording) {
-                setTimeout(function() { // delay to ensure tabremove goes first
-                    if (events[events.length-1].evt == "tabremove" || (events[events.length-1].evt == "tabchange" && events[events.length-1].evt_data.id == activeInfo.tabId)) // ignore double events
+                setTimeout(function() {
+                    if (events[events.length-1].evt == "tabremove" || (events[events.length-1].evt == "tabchange" && events[events.length-1].evt_data.id == activeInfo.tabId)) 
                         return;
 
                     var tab_index = -1;
@@ -444,7 +430,7 @@ chrome.tabs.onUpdated.addListener(
 	}
 );
 
-chrome.tabs.onReplaced !== undefined && chrome.tabs.onReplaced.addListener( // Pre-rendered - special handling for not present in FF
+chrome.tabs.onReplaced !== undefined && chrome.tabs.onReplaced.addListener(
     function (addedTabId, removedTabId) {
 		chrome.tabs.get(addedTabId, function (tab) {
 			if (!tab.url.startsWith("chrome-extension://" + chrome.runtime.id) && !tab.url.startsWith("moz-extension://" + chrome.runtime.id)) {
@@ -475,45 +461,20 @@ chrome.tabs.onReplaced !== undefined && chrome.tabs.onReplaced.addListener( // P
 function updateExtIcon() {
     chrome.storage.local.get('recording', function (isRecording) {
         if (isRecording.recording && !recording) {
-            /*chrome.browserAction.setIcon({
-                path: 'icon-recording-128.png'
-            });*/
 			chrome.browserAction.setBadgeText({ text: "REC" });
 			chrome.browserAction.setBadgeBackgroundColor({ color: "#FF2222" });
             recording = true;
         } else if (!isRecording.recording && recording) {
-            /*chrome.browserAction.setIcon({
-                path: 'icon-128.png'
-            });*/
 			chrome.browserAction.setBadgeText({ text: "" });
             recording = false;
         }
     });
 }
 
-function updateNativeRecordingStatus() {
-    if (bgSettings.recordnative) {
-        chrome.storage.local.get('recording', function (isRecording) {
-            /*
-            if (isRecording.recording) {
-                sendNativeMessage({
-                    'action': 'start_recording'
-                });
-            } else {
-                sendNativeMessage({
-                    'action': 'stop_recording'
-                });
-            }
-            */
-            ;
-        });
-    }
-}
-
 function updateEvents() {
     chrome.storage.local.get('events', function (result) {
         var new_events = result.events;
-        if (!Array.isArray(new_events)) { // for safety only
+        if (!Array.isArray(new_events)) { 
             new_events = [];
         }
         events = new_events;
@@ -553,7 +514,7 @@ function updateProxy() {
     });
 }
 
-chrome.webRequest.onAuthRequired !== undefined && chrome.webRequest.onAuthRequired.addListener( // special handling for not present in FF
+chrome.webRequest.onAuthRequired !== undefined && chrome.webRequest.onAuthRequired.addListener(
 	function(details) {
 		if (proxyAuthEnable) {
 			return({
@@ -623,25 +584,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
 });
 
-/*
-(function(history){
-    var pushState = history.pushState;
-    history.pushState = function(state) {
-        if (typeof history.onpushstate == "function") {
-            history.onpushstate({state: state});
-        }
-        events.push({
-            evt: "historypush",
-            evt_data: state,
-            time: Date.now()
-        });
-        chrome.storage.local.set({events: events});
-        return pushState.apply(history, arguments);
-    }
-})(window.history);
-*/
-
-if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+if (typeof InstallTrigger === 'undefined') {
     chrome.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
         if (request.action == "registrationStatus") {
             if (bgSettings != null) {
@@ -683,44 +626,13 @@ if (typeof InstallTrigger === 'undefined') { // NOT Firefox
     });
 }
 
-chrome.runtime.onInstalled !== undefined && chrome.runtime.onInstalled.addListener(function(details){ // special handling - not present in FF
-    chrome.storage.local.set({simulating: false});    
-    if (details.reason == "install") {
-        if (navigator.userAgent.includes("Wildfire")) {
-            if (typeof InstallTrigger !== 'undefined') { // Firefox
-                setTimeout(function(){
-                    browser.windows.getCurrent({populate: true}).then(function(curr_window){
-                        browser.tabs.update(curr_window.tabs[0].id, {url: browser.extension.getURL("new.html")});
-                    });
-                }, 1000);
-            } else {
-                chrome.windows.getCurrent({populate: true}, function(curr_window) {
-                    chrome.tabs.update(curr_window.tabs[0].id, {url: chrome.extension.getURL("new.html")});
-                });
-            }
-        } else {
-            openUI("docs/getting_started.html");
-        }
-    } else if (details.reason == "update") {
-        var thisVersion = chrome.runtime.getManifest().version;
-        /*chrome.notifications.create("",{
-            type: "basic",
-            title: "Wildfire",
-            message: "The Wildfire extension has been updated",
-            iconUrl: "icon-128.png"
-        });*/
-    }
-});
-
-
-
 function setContextMenus() {
 	chrome.storage.local.get('favorites', function (result) {
         var favorites = result.favorites;
-        if (!Array.isArray(favorites)) { // for safety only
+        if (!Array.isArray(favorites)) {
             favorites = [];
         }
-        if (typeof InstallTrigger !== 'undefined') // Firefox
+        if (typeof InstallTrigger !== 'undefined')
             browser.contextMenus.removeAll().then(function(){
                 if (bgSettings.rightclick) {
                     browser.contextMenus.create({
@@ -738,7 +650,7 @@ function setContextMenus() {
                             browser.contextMenus.create({
                                 "title": "Run '" + favorites[i].name + "'",
                                 "id": "wildfire-favorite-" + i,
-                                "contexts": ["page", "frame", "selection", "link", "editable", "image", "video", "audio"], // ignore chrome-extension://
+                                "contexts": ["page", "frame", "selection", "link", "editable", "image", "video", "audio"],
                                 "documentUrlPatterns": ["http://*/*","https://*/*"],
                                 "onclick": function(info, tab){
                                     browser.windows.get(tab.windowId, null).then(function(curr_window) {
@@ -783,7 +695,7 @@ function setContextMenus() {
                             chrome.contextMenus.create({
                                 "title": "Run '" + favorites[i].name + "'",
                                 "id": "wildfire-favorite-" + i,
-                                "contexts": ["page", "frame", "selection", "link", "editable", "image", "video", "audio"], // ignore chrome-extension://
+                                "contexts": ["page", "frame", "selection", "link", "editable", "image", "video", "audio"],
                                 "documentUrlPatterns": ["http://*/*","https://*/*"],
                                 "onclick": function(info, tab){
                                     chrome.windows.get(tab.windowId, null, function(curr_window) {

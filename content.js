@@ -356,7 +356,7 @@ function updateScrollEvent(e) {
         scrollStartTop = scrollObject.scrollTop;
         scrollStartLeft = scrollObject.scrollLeft;
         scrollTimer = setTimeout(finishScrollEvent, scrollTimeMillis);
-    } else {//} if (scrollObject == e.target) {
+    } else {
         clearTimeout(scrollTimer);
         scrollTimer = setTimeout(finishScrollEvent, scrollTimeMillis);
     } // in theory, 2x concurrent scrolling, should be impossible but isn't
@@ -415,43 +415,4 @@ function addDocumentEventListener(eventName) {
 			});
 		}, 1);
 	}, false);
-}
-
-function initVideoRecording() { // dead code, can't use
-    var constraints = {
-        audio: false,
-        video: true,
-        videoConstraints: {
-            mandatory: {
-                chromeMediaSource: 'tab'
-            }
-        }
-    };
-
-    chrome.tabCapture.capture(constraints, function(stream) {
-        console.log(stream);
-        var options = {
-            type: 'video',
-            mimeType : 'video/webm',
-            // minimum time between pushing frames to Whammy (in milliseconds)
-            frameInterval: 20,
-            video: {
-                width: 1280,
-                height: 720
-            },
-            canvas: {
-                width: 1280,
-                height: 720
-            }
-        };
-        var recordRTC = RecordRTC(stream, options);
-        recordRTC.startRecording();
-
-        setTimeout(function(){
-            recordRTC.stopRecording(function(videoURL) {
-                stream.getVideoTracks()[0].stop();
-                recordRTC.save();
-            });
-        },10*1000);
-    });
 }

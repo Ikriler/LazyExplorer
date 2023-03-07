@@ -88,6 +88,5 @@
     "unlimitedStorage",
     "debugger"
   ],
-  "web_accessible_resources": ["embedded.js"],
   "offline_enabled": true
 }

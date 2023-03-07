@@ -1,5 +1,3 @@
-// 86929E
-
 var mappingData = {
     begin_recording: {
         bgColor: '#56B558',
@@ -545,9 +543,6 @@ function readableEventDetail(event, simulation_log_results) {
             event_type = "<i>" + escaped_value + "</i>";
     }
 
-    //if (event_data.length>57)
-    //    event_data = event_data.substr(0, 57) + "...";
-
     if (event.evt_data) {
         if (event.evt_data.inFrame) {
             event_type += " <span class='hint-circle blue' data-toggle='tooltip' data-placement='top' title='Detected this event within a frame'>?</span>";
@@ -628,14 +623,6 @@ function populateEvents(result) {
         }
         innerHTML += "<td>" + event_details.event_type + "</td>" +
             "<td class=\"color-blue-grey-lighter\">" + event_details.event_data + "</td>";
-        /*
-        innerHTML += "<td>";
-        if (minorEvent)
-            innerHTML += "<span class=\"label label-default\">Not Emulated</span>";
-        else
-            innerHTML += "<span class=\"label label-success\">Emulated</span>";
-        innerHTML += "</td>";
-        */
         innerHTML += "<td>" +
             "<div class=\"font-11 color-blue-grey-lighter uppercase\">Time</div> " +
             event_details.event_time +
@@ -710,14 +697,6 @@ function populateSimulationEvents(result) {
         }
         innerHTML += "<td>" + event_details.event_type + "</td>" +
             "<td class=\"color-blue-grey-lighter\">" + event_details.event_data + "</td>";
-        /*
-        innerHTML += "<td>";
-        if (minorEvent)
-            innerHTML += "<span class=\"label label-default\">Not Emulated</span>";
-        else
-            innerHTML += "<span class=\"label label-success\">Emulated</span>";
-        innerHTML += "</td>";
-        */
         var simtime = ((simulation_log[i].time-simulation_log[0].time)/1000).toFixed(2) + "s";
         if (i==0)
             simtime = "-";
