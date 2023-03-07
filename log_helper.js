@@ -548,7 +548,7 @@ function readableEventDetail(event, simulation_log_results) {
     if (event.evt_data && event.evt_data.url) {
         event_url = event.evt_data.url;
         if (event_url.length>57)
-            event_url = event_url.substr(0, 57) + "...";
+            event_url = event_url.substr(0, 60) + "...";
     }
 
     return {
@@ -588,13 +588,6 @@ function populateEvents(result) {
             event_details = readableEventDetail(events[i], null);
 
         var innerHTML = "<!--" + JSON.stringify(events[i]) + "-->";
-        innerHTML += "<td class=\"table-check\">";
-        if (events[i].evt != "begin_recording" && events[i].evt != "end_recording")
-            innerHTML += "<div class=\"checkbox checkbox-only\">" +
-            "<input type=\"checkbox\" id=\"event-" + i + "\" name=\"eventCheckboxes\">" +
-            "<label for=\"event-" + i + "\"></label>" +
-            "</div>";
-        innerHTML += "</td>";
         if (simulation_log) { // Result in simulation log
             if (simulation_log.length > i) {
                 if (!simulation_log[i].results || simulation_log[i].results.length==1) {
@@ -622,27 +615,15 @@ function populateEvents(result) {
             "</td><td></td>";
         else
             innerHTML += "<td></td><td></td>";
-        if (!simulation_log) {
-            innerHTML += "<td width=\"150\">";
-            if (event_details.evt!="begin_recording" && event_details.evt!="end_recording")
-                innerHTML += "<a href=\"#\" id=\"deleteEvent" + i + "\">Delete</a>";
-            innerHTML += "</td>";
-        }
 
         var eventNode = document.createElement("tr");
         eventNode.innerHTML = innerHTML;
         eventNode.id = "eventRow" + i;
         document.getElementById('events').appendChild(eventNode);
 
-        if (event_details.evt!="begin_recording" && event_details.evt!="end_recording" && !simulation_log) {
-            document.getElementById("deleteEvent" + i).onclick = function(e){
-                deleteEvent(e.target.id.replace("deleteEvent",""));
-            }
-        }
-
         rows_height += $(eventNode).height();
     }
-    // Refresh table UI
+
     if (events.length>0)
         $('.jspContainer').height(rows_height + 43);
 }
@@ -662,13 +643,7 @@ function populateSimulationEvents(result) {
                 break;
             }
         }
-
-        var innerHTML = "<td class=\"table-check\">" +
-            "<div class=\"checkbox checkbox-only\">" +
-            "<input type=\"checkbox\" id=\"event-" + i + "\" name=\"eventCheckboxes\">" +
-            "<label for=\"event-" + i + "\"></label>" +
-            "</div>" +
-            "</td>";
+        var innerHTML = "";
         if (simulation_log) { // Result in simulation log
             if (simulation_log.length > i) {
                 if (!simulation_log[i].results || simulation_log[i].results.length==1) {
@@ -700,23 +675,12 @@ function populateSimulationEvents(result) {
             "</td><td></td>";
         else
             innerHTML += "<td></td><td></td>";
-        if (!simulation_log) {
-            innerHTML += "<td width=\"150\">";
-            if (event_details.evt!="begin_recording" && event_details.evt!="end_recording")
-                innerHTML += "<a href=\"#\" id=\"deleteEvent" + i + "\">Delete</a>";
-            innerHTML += "</td>";
-        }
 
         var eventNode = document.createElement("tr");
         eventNode.innerHTML = innerHTML;
         eventNode.id = "eventRow" + i;
         document.getElementById('events').appendChild(eventNode);
 
-        if (event_details.evt!="begin_recording" && event_details.evt!="end_recording" && !simulation_log) {
-            document.getElementById("deleteEvent" + i).onclick = function(e){
-                deleteEvent(e.target.id.replace("deleteEvent",""));
-            }
-        }
 
         rows_height += $(eventNode).height();
     }
@@ -736,15 +700,3 @@ function populateSimulationEvents(result) {
         document.body.removeChild(pom);  
     });
 }
-
-$('#table-check-head').click(function(e) {
-    if (this.checked) {
-        $('input[name=eventCheckboxes]').each(function() {
-            this.checked = true;
-        });
-    } else {
-        $('input[name=eventCheckboxes]').each(function() {
-            this.checked = false;
-        });
-    }
-});

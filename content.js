@@ -21,7 +21,7 @@ var QueryString = function(){
     }
   } 
   return query_string;
-}();
+}
 
 var all_settings;
 chrome.storage.local.get('settings', function (settings) {

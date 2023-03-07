@@ -6,10 +6,6 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>LazyExplorer</title>
 
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-
     <link rel="stylesheet" href="/theme/css/lib/font-awesome/font-awesome.min.css">
     <link rel="stylesheet" href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"/>
     <link rel="stylesheet" href="/theme/css/main.css">
@@ -44,12 +40,6 @@
                     <div class="tbl-cell tbl-cell-title">
                         <h3>Event Log</h3>
                     </div>
-                    <div class="tbl-cell tbl-cell-action-bordered">
-                        <button id="downloadEventLogButton" type="button" class="action-btn"><i class="font-icon font-icon-download-3"></i></button>
-                    </div>
-                    <div class="tbl-cell tbl-cell-action-bordered">
-                        <button id="deleteMultipleEvents" type="button" class="action-btn"><i class="font-icon font-icon-trash"></i></button>
-                    </div>
                 </div>
             </header>
             <div class="box-typical-body">
@@ -57,17 +47,9 @@
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th class="table-check">
-                                <div class="checkbox checkbox-only">
-                                    <input type="checkbox" id="table-check-head">
-                                    <label for="table-check-head"></label>
-                                </div>
-                            </th>
                             <th style="min-width: 160px;">Type</th>
                             <th>Details</th>
-                            <!--<th>Emulated</th>-->
                             <th colspan="3">Additional Data</th>
-                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody id="events">
@@ -80,10 +62,10 @@
                         </tbody>
                     </table>
                 </div>
-            </div><!--.box-typical-body-->
+            </div>
         </section>
-    </div><!--.container-fluid-->
-</div><!--.page-content-->
+    </div>
+</div>
 
 <script src="/theme/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
 <script src="/theme/js/lib/jquery/jquery.min.js"></script>
