@@ -29,10 +29,6 @@ function deleteSelection() {
   canvas.getCommandStack().commitTransaction();
   canvas.getCommandStack().undostack.pop();
   $('#workflowToolbarUndo').attr('disabled','');
-
-  /*if ($.inArray(figure.userData.evt,link_types)==-1)
-    figure.resetPorts();
-  canvas.remove(figure);*/
   canvas.setCurrentSelection(null);
 }
 $('#workflowToolbarDelete').click(function(){
@@ -776,8 +772,6 @@ function addSection(label) {
 
   var command = new draw2d.command.CommandAdd(canvas, section, (window.innerWidth/2)-108, y);
   canvas.getCommandStack().execute(command);
-  
-  //canvas.add(section);
 
   section.on("move",function(obj,ctx) {
       canvasResize();
@@ -968,8 +962,6 @@ function saveToLocalStorage() {
 
 $(window).unload(function() {
   saveToLocalStorage();
-  // TODO - stall processing time waiting for async
-  //return;
 });
 
 function flushWorkflow() {
@@ -1300,64 +1292,6 @@ function favoriteSwal() {
 }
 $('#workflowToolbarFavorite').click(favoriteSwal);
 
-function cloudUploadSwal() {
-    saveToLocalStorage();
-    swal({
-        title: "Upload Workflow",
-        text: "Enter your workflow name:",
-        type: "input",
-        showCancelButton: true,
-        closeOnConfirm: false,
-        inputPlaceholder: ""
-    }, function (inputValue) {
-        if (inputValue === false || inputValue.trim() === "") {
-            swal("Error", "You need to enter a workflow name", "error");
-            return false;
-        }
-
-        $('.confirm').attr('disabled','');
-
-        getCanvasImage().then(function(png){
-            chrome.storage.local.get('events', function (events) {
-                chrome.storage.local.get('workflow', function (workflow) {
-                    chrome.storage.local.get('settings', function (settings) {
-                        $.ajax({
-                            method: "POST",
-                            url: "https://cloud.wildfire.ai/api/upload",
-                            data: {
-                                name: inputValue.trim(),
-                                workflow: workflow.workflow,
-                                time: Date.now(),
-                                api_key: all_settings.cloudapikey,
-                                account: all_settings.account,
-                                version: chrome.runtime.getManifest().version,
-                                image: png
-                            }
-                        }).always(function(resp) {
-                            if (JSON.parse(resp).result) {
-                              swal({
-                                  title: "Done",
-                                  text: "Your <b>" + inputValue.trim() + "</b> workflow has been uploaded to the Wildfire Cloud.",
-                                  type: "success",
-                                  html: true
-                              });
-                            } else {
-                              swal({
-                                title: "Error",
-                                text: "Your workflow could not be uploaded. Check your quota usage and API key.",
-                                type: "error",
-                                html: true
-                              });
-                            } 
-                            $('.confirm').removeAttr('disabled');
-                        });
-                    });
-                });
-            });
-        });
-    });
-}
-
 function cloneSelection() {
     var cloneNodes = [];
     var retry = true;
@@ -1430,11 +1364,10 @@ function cloneSelection() {
 function resetGridZ() {
     setTimeout(function(){
         canvas.uninstallEditPolicy( gridPolicy );
-        canvas.installEditPolicy( gridPolicy ); // sexy hack to avoid section being under grid
+        canvas.installEditPolicy( gridPolicy );
     },1);
 }
 
-$('#workflowToolbarCloudUpload').click(cloudUploadSwal);
 $('#workflowToolbarClone').click(cloneSelection);
 $('#workflowToolbarUndo').click(function(){
   canvas.getCommandStack().undo();

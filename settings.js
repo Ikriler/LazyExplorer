@@ -72,8 +72,6 @@ chrome.storage.local.get('settings', function (settings) {
         $('#setting-custom-submit').click();
     if (all_settings.runminimized)
         $('#setting-run-minimized').click();
-    if (all_settings.incognito)
-        $('#setting-incognito').click();
     if (all_settings.rightclick)
         $('#setting-rightclick').click();
     if (all_settings.suppressalerts)
@@ -234,10 +232,6 @@ $('#setting-run-minimized').change(function() {
     all_settings.runminimized = $(this).is(":checked");
     updateSettings();
 });
-$('#setting-incognito').change(function() {
-    all_settings.incognito = $(this).is(":checked");
-    updateSettings();
-});
 $('#setting-rightclick').change(function() {
     all_settings.rightclick = $(this).is(":checked");
     updateSettings();
@@ -298,13 +292,6 @@ $('#setting-reset-wildfire').click(function(e) {
     chrome.storage.local.clear(function(){
         chrome.runtime.reload();
     });
-});
-
-chrome.extension.isAllowedIncognitoAccess(function(isAllowedIncognito) {
-    if (!isAllowedIncognito) {
-        $('#setting-incognito').attr('disabled','disabled');
-        $('#incognito-warning').attr('style','');
-    }
 });
 
 chrome.runtime.sendMessage(null, {
@@ -455,8 +442,6 @@ function populateFavoritesTable() {
                 $('#favoritesTable').html("<tr><td colspan='4' style='text-align: center;'>Nothing has been favorited yet!</td></tr>");
             else
                 $('#favoritesTable').html("");
-
-            // Schedule modal
             $('#scheduleWorkflow').html("");
             var default_opt = document.createElement("option");
             default_opt.setAttribute("value", "-1");
@@ -635,8 +620,6 @@ function populateFavoritesTable() {
                         });
                     });
                 });
-
-                // Also populate the schedule create modal option
                 var opt = document.createElement("option");
                 opt.setAttribute("value", i);
                 opt.innerHTML = favorites[i].name;

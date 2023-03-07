@@ -2192,54 +2192,6 @@ function execEvent(node) {
                     });
                 }
             });
-        case 'recaptcha':
-            return new Promise(function(resolve, reject) {
-                code = 'if ($(".g-recaptcha").length > 0 || document.location.href.includes("k=")) { var end = document.location.href.indexOf("&",document.location.href.indexOf("k=")); if(end==-1) end = document.location.href.indexOf("#",document.location.href.indexOf("k=")); if(end==-1) end = 9999; var sitekey = $(".g-recaptcha").attr("data-sitekey") || document.location.href.substring(document.location.href.indexOf("k=")+2,end);sitekey; } else { throw "NOCAPTCHAFOUND"; }';
-                runCode(code, node).then(function(result){
-                    var sitekey = result.results[0];
-                    runCode("location.host", node).then(function(result) {
-                        $.ajax({
-                            method: "POST",
-                            url: "https://api.wildfire.ai/v1/premium-recaptcha",
-                            data: sitekey + "," + result.results[0] + "," + bgSettings.cloudapikey || ""
-                        }).always(function(resp) {
-                            runCode("$('#g-recaptcha-response').html('" + resp.responseText + "');", node).then(function(result){
-                                var runcode = "var script = document.createElement('script');\
-                                    script.setAttribute(\"type\", \"application/javascript\");\
-                                    script.textContent = \"window['___grecaptcha_cfg']['clients'][0]['T']['Rk']['callback']('" + resp.responseText + "');\";\
-                                    document.documentElement.appendChild(script);\
-                                    document.documentElement.removeChild(script);";
-                                runCode(runcode, node).then(function(result){
-                                    setTimeout(function(){
-                                        resolve({
-                                            error: false,
-                                            results: [resp.responseText],
-                                            id: node.id,
-                                            time: Date.now()
-                                        });
-                                    },3000);
-                                }).catch(function(result){
-                                    setTimeout(function(){
-                                        resolve({
-                                            error: false,
-                                            results: [resp.responseText],
-                                            id: node.id,
-                                            time: Date.now()
-                                        });
-                                    },3000);
-                                });
-                            });
-                        });
-                    });
-                }).catch(function(result){
-                    reject({
-                        error: true,
-                        results: null,
-                        id: node.id,
-                        time: Date.now()
-                    });
-                });
-            });
         default:
             terminateSimulation(false, "Unknown event type: " + node.userData.evt); // TODO - check
             break;
@@ -2336,7 +2288,6 @@ function runCodeFrameURLPrefix(code, node, urlprefix) {
                                     time: Date.now()
                                 });
                         },function(results){
-                            // Check for and handle special errors here
                             reject({
                                 error: true,
                                 results: results,
@@ -2348,7 +2299,7 @@ function runCodeFrameURLPrefix(code, node, urlprefix) {
                 });
             }
 
-            if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+            if (typeof InstallTrigger === 'undefined') {
                 chrome.tabs.query({windowId: new_window.id}, function(tabs){
                     runCodeInActiveTab(tabs);
                 });
@@ -2363,7 +2314,6 @@ function runCodeFrameURLPrefix(code, node, urlprefix) {
                 results: null,
                 id: node.id,
                 time: Date.now()
-                //event: node
             });
         }
     });
@@ -2447,8 +2397,7 @@ function waitForElement(resolve, csspath, returnvar) {
 					}
 					chrome.tabs.executeScript(tabs[activeTab].id,{
 						code: "$('" + csspath + "').length",
-						frameId: 0, // TODO - frame support
-                        //allFrames: true,
+						frameId: 0,
 						matchAboutBlank: true
 					}, function(results){
 						if (results && results[0])
@@ -2457,7 +2406,7 @@ function waitForElement(resolve, csspath, returnvar) {
 				} catch(err) {;}
             }
 
-            if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+            if (typeof InstallTrigger === 'undefined') {
                 chrome.tabs.query({windowId: new_window.id}, function(tabs){
                     waitForElementInActiveTab(tabs);
                 });
@@ -2474,7 +2423,7 @@ function waitForElement(resolve, csspath, returnvar) {
 function terminateSimulation(finished, reason) {
 	if (terminated)
 		return;
-	terminated = true; // prevent race against close listener
+	terminated = true;
 
     chrome.storage.local.set({simulating: false});
 	

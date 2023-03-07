@@ -1,7 +1,3 @@
-/**
- * Created by ian.mckay on 24/04/2016.
- */
-
 var events = [];
 var recording_start_time = 0;
 var recording_end_time = 0;
@@ -177,7 +173,7 @@ if (document.getElementById('eventfileContainer')) {
                 chrome.storage.local.set({recording: false});
                 chrome.notifications.create("event_log_imported",{
                     type: "basic",
-                    title: "Wildfire",
+                    title: "LazyExplorer",
                     message: "Event Log Imported",
                     iconUrl: "icon-128.png"
                 });

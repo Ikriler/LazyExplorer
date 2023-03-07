@@ -177,13 +177,6 @@ var mappingData = {
         optlabel: 'Desktop Automation',
         endoptlabel: true
     },
-    recaptcha: {
-        bgColor: '#CBD8DE',
-        event_type: 'Solve reCAPTCHA',
-        icon: 'tiles-view.png',
-        optlabel: 'Cloud Account Required',
-        endoptlabel: true
-    }
 };
 
 function formatDateLong(date) {
@@ -473,11 +466,6 @@ function readableEventDetail(event, simulation_log_results) {
         case 'scroll':
             event_type = "Page Scroll";
             event_data = "Scrolled for " + (event.evt_data.endtime-event.time) + " ms";
-            minorEvent = false;
-            break;
-        case 'recaptcha':
-            event_type = "reCAPTCHA Solve";
-            event_data = "&nbsp;";
             minorEvent = false;
             break;
         case 'setproxy':

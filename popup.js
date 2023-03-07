@@ -1,7 +1,3 @@
-/**
- * Created by ian on 24/04/2016.
- */
-
 var recording = false;
 var simulating = false;
 
@@ -21,11 +17,10 @@ function toggleRecording() {
                     evt_data: {}
                 });
                 chrome.storage.local.set({events: events}, function() {
-                    if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+                    if (typeof InstallTrigger === 'undefined') {
                         chrome.tabs.query({
                             windowType: "popup"
                         },function(tabs){
-                            /* Guide */
                             chrome.tabs.query({
                                 active: true,
                                 currentWindow: true
@@ -127,10 +122,6 @@ function updatePopupUI() {
 var triggerLoopClicked = false;
 var windowWidth = 1280;
 var windowHeight = 800;
-if ((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) { // Opera
-    windowWidth*=window.devicePixelRatio;
-    windowHeight*=window.devicePixelRatio;
-}
 
 window.onload = function() {
     document.getElementById('dashLink').onclick = function () {

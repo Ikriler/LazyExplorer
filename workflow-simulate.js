@@ -14,7 +14,6 @@ var myRaftLabelLocator = draw2d.layout.locator.TopLocator.extend({
         if (target instanceof draw2d.Port) {
             target.setPosition(boundingBox.w/2-offset,0);
         } else {
-            //target.setPosition(boundingBox.w/2-(targetBoundingBox.w/2)-offset,-(targetBoundingBox.h+2));
             target.setPosition(0,0);
         }
     }
@@ -30,7 +29,7 @@ function defineCustoms() {
         init: function (attr) {
             this._super(attr);
 
-            setTimeout(function(self) { // need the timeout, some weird loss of scope issue - 31/1/16: Needed because the userData isnt set when init is called
+            setTimeout(function(self) { 
                 var event = self.userData.evt;
 
                 if (event == "begin_recording")

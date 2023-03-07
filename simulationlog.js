@@ -1,7 +1,3 @@
-/**
- * Created by ian on 31/05/2016.
- */
-
 function formatDateLong(date) {
   var monthNames = [
     "January", "February", "March",

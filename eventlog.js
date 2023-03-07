@@ -1,7 +1,3 @@
-/**
- * Created by ian on 24/04/2016.
- */
-
 function deleteEvent(i) {
     swal({
         title: "Are you sure?",
@@ -70,16 +66,12 @@ document.addEventListener('visibilitychange', function(){
     }
 });
 
-//window.onload = function() {
-    chrome.storage.local.get('events', function (result) {
-        populateEvents(result);
-    });
-    document.getElementById('downloadEventLogButton').addEventListener('click', function() {
-        downloadEventLog();
-    });
-    document.getElementById('deleteMultipleEvents').addEventListener('click', function() {
-        deleteMultipleEvents();
-    });
-    
-
-//}
+chrome.storage.local.get('events', function (result) {
+    populateEvents(result);
+});
+document.getElementById('downloadEventLogButton').addEventListener('click', function() {
+    downloadEventLog();
+});
+document.getElementById('deleteMultipleEvents').addEventListener('click', function() {
+    deleteMultipleEvents();
+});

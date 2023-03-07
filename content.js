@@ -1,4 +1,4 @@
-/* Wildfire Content Script */
+
 
 var QueryString = function(){
   // This function is anonymous, is executed immediately and 
@@ -81,16 +81,6 @@ chrome.storage.local.get('settings', function (settings) {
     addDocumentEventListener("copy");
     addDocumentEventListener("paste");
 
-    if (all_settings.customsubmit) {
-        /* Inject JS directly in for submit intercepts */
-        var s = document.createElement('script');
-        s.src = chrome.extension.getURL('embedded.js');
-        s.onload = function () {
-            this.parentNode.removeChild(this);
-        };
-        (document.head || document.documentElement).appendChild(s);
-    }
-
     if (all_settings.suppressalerts) {
         chrome.storage.local.get('simulating', function (simulating) {
             if (simulating.simulating) {
@@ -99,7 +89,6 @@ chrome.storage.local.get('settings', function (settings) {
         });
     }
 
-    /* Duplicate hover CSS classes */
     if (window.location.href.substring(0, 19) != "chrome-extension://" && window.location.href.substring(0, 16) != "moz-extension://" && all_settings.emulatehover) {
         var styles = document.styleSheets;
         for (var i = 0, len = styles.length; i < len; i++) {
@@ -165,18 +154,6 @@ chrome.storage.local.get('settings', function (settings) {
             $("*").removeClass("wildfire-hover");
         }
     }
-    /****/
-
-    /* Guide */
-    setTimeout(function(){
-        chrome.storage.local.get('simulating', function (simulating) {
-            if (window.location.href.startsWith("https://wildfire.ai/tour1_1") && !simulating.simulating) {
-                var s = document.createElement('script');
-                s.textContent = 'initTour();';
-                document.head.appendChild(s);
-            }
-        });
-    },500);
 });
 
 function getFrameIndex() {

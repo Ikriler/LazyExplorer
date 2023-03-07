@@ -1,7 +1,3 @@
-/**
- * Created by ian on 31/05/2016.
- */
-
 var simulationId = window.location.hash.split("#")[1];
 if (simulationId === undefined)
     window.location.href = "/simulationlog.html";
@@ -63,8 +59,6 @@ function populateSimulation() {
             $('#terminationReason').attr('style','');
             $('#terminationReason').attr('class','color-red');
         }
-
-        //$('#simDetails').html(JSON.stringify(simulations[i].log, null, 2));
         if (simulations[i].node_details !== undefined && simulations[i].node_details.length > 0)
             populateSimulationEvents(simulations[i]);
     });
