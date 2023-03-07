@@ -130,7 +130,7 @@ window.onload = function() {
                 windowType: "popup"
             },function(tabs){
                 chrome.windows.create({
-                    url: chrome.extension.getURL("dashboard.html"),
+                    url: chrome.extension.getURL("simulationlog.html"),
                     type: "popup",
                     width: windowWidth,
                     height: windowHeight,
@@ -141,7 +141,7 @@ window.onload = function() {
             });
         } else {
             chrome.windows.create({
-                url: chrome.extension.getURL("dashboard.html"),
+                url: chrome.extension.getURL("simulationlog.html"),
                 width: windowWidth,
                 height: windowHeight,
                 left: Math.round(screen.width/2-(windowWidth/2)),
