@@ -44,13 +44,13 @@
     "128": "icon-128.png"
   },
   "background":  {
-    "scripts": ["tesseract/tesseract.js", "jquery-2.2.4.min.js", "main.js", "aes.js", "exprparse.js", "fuzzyset/fuzzyset.js"]
+    "scripts": ["tesseract/tesseract.js", "lib/jquery-2.2.4.min.js", "main.js", "lib/aes.js", "lib/exprparse.js", "fuzzyset/fuzzyset.js"]
   },
   "content_scripts": [
     {
       "matches": ["http://*/*","https://*/*"],
       "match_about_blank": true,
-      "js": ["jquery-2.2.4.min.js", "content.js"],
+      "js": ["lib/jquery-2.2.4.min.js", "content.js"],
       "all_frames": true
     }
   ],
