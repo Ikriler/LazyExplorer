@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="/theme/css/lib/font-awesome/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"
+    />
+    <link rel="stylesheet" href="/theme/css/main.css" />
+    <link rel="stylesheet" href="/theme/css/custom.css" />
+
+    <title>LazyExplorer</title>
+  </head>
+  <body>
+    <header class="custom-header">
+      <ul class="nav nav-inline navbar-dark nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="/simulationlog.html">Simulation Log</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/eventlog.html">Event Log</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/workfloweditor.html">Workflow Editor</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/settings.html">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/favorites.html">Favorites</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/scheduled.html">Scheduled</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/diskusage.html">Disk Usage</a>
+        </li>
+      </ul>
+    </header>
+      <div>
+        <div class="card-block">
+            <p class="card-text">
+                <h5 class="m-t-lg with-border">Scheduled Simulations</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Workflow</th>
+                                <th>Scheduled For</th>
+                                <th>Repeat</th>
+                                <th>Run On</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scheduledTable">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+                <div style="text-align: right;">
+                    <button id="addScheduledSim" data-toggle="modal" data-target=".scheduledAdd" class="btn btn-rounded btn-info">Add New Schedule</button>
+                </div>
+            </p>
+            <div class="modal fade scheduledAdd" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+                                <i class="font-icon-close-2"></i>
+                            </button>
+                            <h4 class="modal-title">Add Scheduled Simulation</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Enter the details of the workflow to be simulated below.
+                            </p>
+                            <fieldset class="form-group">
+                                <label class="form-label semibold" for="scheduleWorkflow">Workflow</label>
+                                <select id="scheduleWorkflow" class="form-control">
+                                    <option value="-1">Current Workflow</option>
+                                </select>
+                                <small class="text-muted">&nbsp;</small>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label class="form-label semibold" for="scheduleDateTime">Date / Time of Simulation</label>
+                                <div class='input-group date datetimepicker-1'>
+                                    <input id="scheduleDateTime" type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <i class="font-icon font-icon-calend"></i>
+                                    </span>
+                                </div>
+                                <small class="text-muted">Click the calendar icon to choose your date and time.</small>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label class="form-label semibold" for="scheduleRepeat">Repeat</label>
+                                <select id="scheduleRepeat" class="form-control">
+                                    <option value="0">Never</option>
+                                    <option value="1">Every Minute</option>
+                                    <option value="5">Every 5 Minutes</option>
+                                    <option value="15">Every 15 Minutes</option>
+                                    <option value="30">Every 30 Minutes</option>
+                                    <option value="60">Every Hour</option>
+                                    <option value="240">Every 4 Hours</option>
+                                    <option value="1440">Every 24 Hours</option>
+                                </select>
+                                <small class="text-muted">&nbsp;</small>
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <label class="form-label semibold" for="scheduleDays">Days</label>
+                                <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn daybtn">
+                                        <input id="sundaySchedule" type="checkbox" autocomplete="off"> Sun
+                                    </label>
+                                    <label class="btn daybtn">
+                                        <input id="mondaySchedule" type="checkbox" autocomplete="off"> Mon
+                                    </label>
+                                    <label class="btn daybtn">
+                                        <input id="tuesdaySchedule" type="checkbox" autocomplete="off"> Tue
+                                    </label>
+                                    <label class="btn daybtn">
+                                        <input id="wednesdaySchedule" type="checkbox" autocomplete="off"> Wed
+                                    </label>
+                                    <label class="btn daybtn">
+                                        <input id="thursdaySchedule" type="checkbox" autocomplete="off"> Thu
+                                    </label>
+                                    <label class="btn daybtn">
+                                        <input id="fridaySchedule" type="checkbox" autocomplete="off"> Fri
+                                    </label>
+                                    <label class="btn daybtn">
+                                        <input id="saturdaySchedule" type="checkbox" autocomplete="off"> Sat
+                                    </label>
+                                </div>
+                                <small class="text-muted">Simulations will run only on the days highlighted.</small>
+                            </fieldset>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cancel</button>
+                            <button id="addScheduleSubmitButton" type="button" class="btn btn-rounded btn-primary">Add Schedule</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <script src="/theme/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+      <script src="/theme/js/lib/jquery/jquery.min.js"></script>
+      <script src="/theme/js/lib/tether/tether.min.js"></script>
+      <script src="/theme/js/lib/bootstrap/bootstrap.min.js"></script>
+      <script src="/theme/js/plugins.js"></script>
+
+      <script src="/theme/js/app.js"></script>
+      <script src="/lib/aes.js"></script>
+      <script src="/app.js"></script>
+      <script type="module" src="/scheduled.js"></script>
+  </body>
+</html>

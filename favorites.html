@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="/theme/css/lib/font-awesome/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"
+    />
+    <link rel="stylesheet" href="/theme/css/main.css" />
+    <link rel="stylesheet" href="/theme/css/custom.css" />
+
+    <title>LazyExplorer</title>
+  </head>
+  <body>
+    <header class="custom-header">
+      <ul class="nav nav-inline navbar-dark nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="/simulationlog.html">Simulation Log</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/eventlog.html">Event Log</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/workfloweditor.html">Workflow Editor</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/settings.html">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/favorites.html">Favorites</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/scheduled.html">Scheduled</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/diskusage.html">Disk Usage</a>
+        </li>
+      </ul>
+    </header>
+
+    <div>
+      <div class="card-block">
+          <p class="card-text">
+              <h5 class="m-t-lg with-border">Favorites</h5>
+              <div class="table-responsive">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Right-Click Menu</th>
+                              <th>Shortcut Keys</th>
+                              <th>Date Favorited</th>
+                              <th>Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody id="favoritesTable">
+                          
+                      </tbody>
+                  </table>
+              </div>
+          </p>
+      </div>
+    </div>
+
+    <script src="/theme/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+    <script src="/theme/js/lib/jquery/jquery.min.js"></script>
+    <script src="/theme/js/lib/tether/tether.min.js"></script>
+    <script src="/theme/js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="/theme/js/plugins.js"></script>
+
+    <script src="/theme/js/app.js"></script>
+    <script src="/lib/aes.js"></script>
+    <script src="/app.js"></script>
+    <script src="/favorites.js"></script>
+  </body>
+</html>

@@ -143,16 +143,6 @@ chrome.storage.local.get('settings', function (settings) {
             };
             xhr.send();
         }
-
-        function simulateHoverElement(el) {
-            stopSimulateHover();
-            $(el).addClass("wildfire-hover");
-            $(el).parents().addClass("wildfire-hover");
-        }
-
-        function stopSimulateHover() {
-            $("*").removeClass("wildfire-hover");
-        }
     }
 });
 
@@ -164,7 +154,6 @@ function getFrameIndex() {
             return i+1;
         }
     }
-
     return -1;
 }
 

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="/theme/css/lib/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"/>
+    <link rel="stylesheet" href="/theme/css/main.css">
+    <link rel="stylesheet" href="/theme/css/custom.css">
+
+    <title>LazyExplorer</title>
+</head>
+<body>
+    <header class="custom-header">
+        <ul class="nav nav-inline navbar-dark nav-pills">
+            <li class="nav-item">
+                <a class="nav-link" href="/simulationlog.html">Simulation Log</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/eventlog.html">Event Log</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/workfloweditor.html">Workflow Editor</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/settings.html">Settings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/favorites.html">Favorites</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/scheduled.html">Scheduled</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/diskusage.html">Disk Usage</a>
+            </li>
+        </ul>
+    </header>
+    <div>
+        <div class="card-block" style="padding-bottom: 8px;">
+            <p class="card-text">
+            <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="m-t-lg with-border">Disk Usage</h5>
+                    <section class="widget widget-pie-chart" style="margin-bottom: 0;">
+                        <div class="no-padding">
+                            <div class="tbl tbl-grid">
+                                <div class="tbl-row">
+                                    <div class="tbl-cell">
+                                        <div class="ggl-pie-chart-container">
+                                            <div id="usage-chart"></div>
+                                        </div>
+                                    </div>
+                                    <div class="tbl-cell tbl-cell-340px">
+                                        <div class="col" style="float: none; width: 100%;">
+                                            <div class="chart-box-info">
+                                                <div id="total-usage" class="number"></div>
+                                                <div class="caption">Total Usage</div>
+                                            </div>
+                                        </div>
+                                        <div class="chart-legend-tbl">
+                                            <div class="title">Legend:</div>
+                                            <div class="tbl">
+                                                <div class="tbl-row">
+                                                    <div class="tbl-cell tbl-cell-legend">
+                                                        <div class="dot orange"></div>
+                                                        Simulation Log
+                                                    </div>
+                                                    <div id="simulation-log-usage" class="tbl-cell tbl-cell-value"></div>
+                                                </div>
+                                                <div class="tbl-row">
+                                                    <div class="tbl-cell tbl-cell-legend">
+                                                        <div class="dot green"></div>
+                                                        Event Log
+                                                    </div>
+                                                    <div id="event-log-usage" class="tbl-cell tbl-cell-value"></div>
+                                                </div>
+                                                <div class="tbl-row">
+                                                    <div class="tbl-cell tbl-cell-legend">
+                                                        <div class="dot red"></div>
+                                                        Workflow Editor
+                                                    </div>
+                                                    <div id="workflow-editor-usage" class="tbl-cell tbl-cell-value"></div>
+                                                </div>
+                                                <div class="tbl-row">
+                                                    <div class="tbl-cell tbl-cell-legend">
+                                                        <div class="dot blue"></div>
+                                                        Favorites
+                                                    </div>
+                                                    <div id="favorites-usage" class="tbl-cell tbl-cell-value"></div>
+                                                </div>
+                                                <div class="tbl-row">
+                                                    <div class="tbl-cell tbl-cell-legend">
+                                                        <div class="dot purple"></div>
+                                                        Metadata
+                                                    </div>
+                                                    <div id="metadata-usage" class="tbl-cell tbl-cell-value"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="m-t-lg with-border">Clear Data</h5>
+                    <div class="form-group row">
+                        <label class="col-sm-6 form-control-label">Clear Simulation Log</label>
+                        <div class="col-sm-6">
+                            <button id="setting-flush-simulation-log" class="btn btn-rounded">Clear</button>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-6 form-control-label">Clear Event Log and Workflow</label>
+                        <div class="col-sm-6">
+                            <button id="setting-flush-event-log-workflow" class="btn btn-rounded">Clear</button>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-6 form-control-label">Clear Favorites</label>
+                        <div class="col-sm-6">
+                            <button id="setting-flush-favorites" class="btn btn-rounded">Clear</button>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-6 form-control-label">Reset Data</label>
+                        <div class="col-sm-6">
+                            <button id="setting-reset-wildfire" class="btn btn-rounded btn-danger">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+            </p>
+        </div>
+    </div>
+
+    <script src="/theme/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+    <script src="/theme/js/lib/jquery/jquery.min.js"></script>
+    <script src="/theme/js/lib/tether/tether.min.js"></script>
+    <script src="/theme/js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="/theme/js/plugins.js"></script>
+
+    <script src="/theme/js/lib/d3/d3.min.js"></script>
+    <script src="/theme/js/lib/charts-c3js/c3.min.js"></script>
+
+    <script src="/theme/js/app.js"></script>
+    <script src="/lib/aes.js"></script>
+    <script src="/app.js"></script>
+    <script src="/diskusage.js"></script>
+</body>
+</html>

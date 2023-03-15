@@ -325,8 +325,6 @@ chrome.notifications.onClicked.addListener(function(notificationId){
         openUI("workfloweditor.html");
     } else if (notificationId == "sim_complete") {
         openUI("simulations.html#0");
-    } else if (notificationId == "no_recorded_events") {
-        openUI("docs/getting_started.html");
     } else if (notificationId == "event_log_imported") {
         openUI("eventlog.html");
     }
