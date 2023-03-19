@@ -1,4 +1,4 @@
-var monthNames = [
+const monthNames = [
   "January",
   "February",
   "March",

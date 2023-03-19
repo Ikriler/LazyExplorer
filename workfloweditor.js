@@ -797,8 +797,8 @@ function addNode(event) {
   if (all_settings.directinputdefault && ["keyup","keydown","keypress","input","mouseup","mousedown","click"].includes(event.evt))
     event['useDirectInput'] = true;
   var node = new CustomNode({ // can change Oval to Rectangle
-    radius: 10,
-    stroke:3,
+    radius: 0,
+    stroke: 3,
     color: "#888888",
     resizeable: false,
     bgColor: bgColor,
