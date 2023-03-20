@@ -7,7 +7,7 @@ function populateFavoritesTable() {
             }
 
             if (favorites.length < 1)
-                $('#favoritesTable').html("<tr><td colspan='4' style='text-align: center;'>Nothing has been favorited yet!</td></tr>");
+                $('#favoritesTable').html("<tr><td colspan='5' style='text-align: center;'>Nothing has been favorited yet!</td></tr>");
             else
                 $('#favoritesTable').html("");
             $('#scheduleWorkflow').html("");

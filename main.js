@@ -582,47 +582,47 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
 });
 
-if (typeof InstallTrigger === 'undefined') {
-    chrome.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
-        if (request.action == "registrationStatus") {
-            if (bgSettings != null) {
-                sendResponse({
-                    "success": true,
-                    "account": bgSettings.account,
-                    "cloudapikey": bgSettings.cloudapikey,
-                    "version": chrome.runtime.getManifest().version
-                });
-            } else {
-                sendResponse({
-                    "success": false,
-                    "version": chrome.runtime.getManifest().version
-                });
-            }
-        } else if (request.action == "openExtension") {
-            var windowWidth = 1280;
-            var windowHeight = 800;
-            chrome.windows.create({
-                url: chrome.extension.getURL(request.url),
-                type: "popup",
-                width: windowWidth,
-                height: windowHeight,
-                left: screen.width/2-(windowWidth/2),
-                top: screen.height/2-(windowHeight/2)
-            });
-        } else if (request.action == "registerExtension") {
-            chrome.storage.local.get('settings', function (settings) {
-                bgSettings = settings.settings;
-                bgSettings.account = request.account;
-                bgSettings.cloudapikey = request.cloudapikey;
-                chrome.storage.local.set({settings: bgSettings});
-            });
-            sendResponse({
-                "success": true,
-                "version": chrome.runtime.getManifest().version
-            });
-        }
-    });
-}
+// if (typeof InstallTrigger === 'undefined') {
+//     chrome.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
+//         if (request.action == "registrationStatus") {
+//             if (bgSettings != null) {
+//                 sendResponse({
+//                     "success": true,
+//                     "account": bgSettings.account,
+//                     "cloudapikey": bgSettings.cloudapikey,
+//                     "version": chrome.runtime.getManifest().version
+//                 });
+//             } else {
+//                 sendResponse({
+//                     "success": false,
+//                     "version": chrome.runtime.getManifest().version
+//                 });
+//             }
+//         } else if (request.action == "openExtension") {
+//             var windowWidth = 1280;
+//             var windowHeight = 800;
+//             chrome.windows.create({
+//                 url: chrome.extension.getURL(request.url),
+//                 type: "popup",
+//                 width: windowWidth,
+//                 height: windowHeight,
+//                 left: screen.width/2-(windowWidth/2),
+//                 top: screen.height/2-(windowHeight/2)
+//             });
+//         } else if (request.action == "registerExtension") {
+//             chrome.storage.local.get('settings', function (settings) {
+//                 bgSettings = settings.settings;
+//                 bgSettings.account = request.account;
+//                 bgSettings.cloudapikey = request.cloudapikey;
+//                 chrome.storage.local.set({settings: bgSettings});
+//             });
+//             sendResponse({
+//                 "success": true,
+//                 "version": chrome.runtime.getManifest().version
+//             });
+//         }
+//     });
+// }
 
 function setContextMenus() {
 	chrome.storage.local.get('favorites', function (result) {
@@ -729,7 +729,7 @@ function send_message(msg) {
     try {
 	    port.postMessage(msg);
     } catch(err) {
-        ; // TODO: Handle this
+        print(err);
     }
 }
 

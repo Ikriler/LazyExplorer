@@ -21,6 +21,9 @@ export class ElementContructor {
     if (imgSrc) {
       card += '<img style="max-height: 110px;" src="' + imgSrc + '">';
     }
+    else {
+      card += '<img style="max-height: 110px;" src="/icons/noAvailableScreen.png">';
+    }
 
     card +=
       "</h1>\
@@ -28,7 +31,13 @@ export class ElementContructor {
 
     card += '<div class="h4">' + logFrom + "</div>";
 
-    card += '<div class="h5 text-secondary mb-2">' + reason + "</div>";
+    if(reason) {
+      card += '<div class="h5 text-secondary mb-2">' + reason + "</div>";
+    }
+    else {
+      card += '<div class="h5 text-secondary mb-2">' + "Success" + "</div>";
+    }
+
 
     card +=
       '<div class="progress" style= "height: 20px;">\

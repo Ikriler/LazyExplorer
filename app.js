@@ -11,8 +11,6 @@ var node_details = [];
 
 chrome.storage.local.get('settings', function (settings) {
     all_settings = {
-        "account": "",
-        "cloudapikey": "",
         "emulatehover": false,
         "leavesimulationopen": false,
         "clearbrowsingdata": false,
@@ -77,15 +75,15 @@ function downloadEventLog() {
         type: "input",
         showCancelButton: true,
         closeOnConfirm: false,
-        inputValue: "WildfireExport_" + Math.floor(Date.now() / 1000) + ".wfire"
+        inputValue: "" + Math.floor(Date.now() / 1000) + ".le"
     }, function (filename) {
         if (filename === false) return false;
         if (filename === "") {
             swal("Error", "You need to specify a filename.", "error");
             return false;
         }
-        if (!filename.endsWith(".wfire") && !filename.endsWith(".WFIRE")) {
-            swal("Error", "The extension must be .wfire", "error");
+        if (!filename.endsWith(".le") && !filename.endsWith(".LE")) {
+            swal("Error", "The extension must be .le", "error");
             return false;
         }
 

@@ -33,7 +33,9 @@
       style="display: none"
     />
 
-    <nav class="navbar p-3 navbar-dark bg-dark navbar-expand-lg mb-sm-3 justify-content-center">
+    <nav
+      class="navbar p-3 navbar-dark bg-dark navbar-expand-lg mb-sm-3 justify-content-center"
+    >
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link active" href="/simulationlog.html"
@@ -109,12 +111,12 @@
                   <small id="terminationReason" style="display: none"></small>
                 </div>
               </section>
-              <section class="proj-page-section proj-page-labels">
+              <!-- <section class="proj-page-section proj-page-labels">
                 <header class="proj-page-subtitle padding-sm">
                   <h3>Attributes</h3>
                 </header>
                 <div id="tags"></div>
-              </section>
+              </section> -->
               <section class="proj-page-section proj-page-dates">
                 <header class="proj-page-subtitle padding-sm">
                   <h3>Dates</h3>
@@ -130,15 +132,13 @@
                   </div>
                 </div>
               </section>
-              <section class="proj-page-section">
-                <ul class="proj-page-actions-list">
-                  <li>
-                    <a id="deleteSimulationLink" href="#"
-                      ><i class="font-icon font-icon-trash"></i>Delete
-                      Simulation</a
-                    >
+              <section class="proj-page-section text-center">
+                <!-- <ul class="proj-page-actions-list">
+                  <li class="text-center">
+                    <a id="deleteSimulationLink" href="#" class="btn btn-danger">Delete simulation</a>
                   </li>
-                </ul>
+                </ul> -->
+                <a id="deleteSimulationLink" href="#" class="btn btn-danger">Delete simulation</a>
               </section>
             </section>
           </div>

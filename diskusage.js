@@ -22,8 +22,8 @@ $("#setting-flush-favorites").click(function (e) {
         }
       }
       chrome.storage.local.set({ scheduled: scheduled }, function () {
-        populateFavoritesTable();
-        populateScheduledTable();
+        // populateFavoritesTable();
+        // populateScheduledTable();
         calculateUsage();
       });
     });

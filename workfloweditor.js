@@ -360,10 +360,10 @@ function getEventOptionsHtml(userdata) {
       wait_time = userdata.wait_time;
     else
       wait_time = escapeOrDefault(userdata.wait_time/1000,"0");
-    return "<div class=\"form-group\"><label class=\"form-label semibold\" for=\"event_detail_timer\">Timer</label>" +
+    return "<div class=\"form-group\"><label class=\"form-label semibold\" for=\"event_detail_timer\">Timer seconds</label>" +
     "    <div class=\"input-group\">" +
     "        <input type=\"text\" class=\"form-control\" id=\"event_detail_timer\" value=\"" + wait_time + "\">" +
-    "        <div class=\"input-group-addon\">secs</div>" +
+    "        <div class=\"input-group-addon\"></div>" +
     "    </div>" +
     "</div>";
   } else if (userdata.evt == "wait_for_element") {
@@ -830,10 +830,6 @@ function addNode(event) {
   return node;
 }
 
-function deselectedFigure(figure) {
-  $('#workflowsidepanel').attr('style','display: none;');
-}
-
 function canvasResize() {
     var heights = canvas.getFigures().clone().map(function(f){ return f.getAbsoluteY()+f.getHeight();});
     var height = Math.max(window.innerHeight-142,200 + Math.max.apply(Math,heights.asArray()));
@@ -852,54 +848,6 @@ function canvasResize() {
         });
     },300);
 }
-
-function getCanvasImage() {
-    clearProcessIcons();
-    return new Promise(function(resolve, reject) {
-        canvas.setCurrentSelection(null);
-        var xCoords = [];
-        var yCoords = [];
-        canvas.getFigures().each(function(i,f){
-            var b = f.getBoundingBox();
-            xCoords.push(b.x, b.x+b.w);
-            yCoords.push(b.y, b.y+b.h);
-        });
-        var minX   = Math.min.apply(Math, xCoords) - 30;
-        var minY   = Math.min.apply(Math, yCoords) - 30;
-        var width  = Math.max.apply(Math, xCoords)-minX + 30;
-        var height = Math.max.apply(Math, yCoords)-minY + 30;
-
-        canvas.getAllPorts().each(function(i,p){ // hide figure ports for screenshot
-            p.setVisible(false);
-        });
-        gridPolicy.setGrid(1); // sexy hack to make background white
-        
-        var writer = new draw2d.io.png.Writer();
-        writer.marshal(canvas,function(png){
-            gridPolicy.setGrid(5); // reset sexy hack
-
-            resolve(png);
-        }, new draw2d.geo.Rectangle(minX,minY,width,height));
-    });
-}
-
-function exportCanvasImage() {
-    getCanvasImage().then(function(png){
-        var filename = "WildfireWorkflowImage_" + Math.floor(Date.now() / 1000) + ".png";
-
-        var element = document.createElement('a');
-        element.setAttribute('href', png);
-        element.setAttribute('download', filename);
-
-        element.style.display = 'none';
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-    });
-}
-$('#workflowToolbarExportImage').click(function(){
-    exportCanvasImage();
-});
 
 function importJSON(json) {
     canvas.clear();
@@ -985,15 +933,15 @@ function exportJSON() {
           type: "input",
           showCancelButton: true,
           closeOnConfirm: false,
-          inputValue: "WildfireSimulationExport_" + Math.floor(Date.now() / 1000) + ".wfsim"
+          inputValue: Math.floor(Date.now() / 1000) + ".le"
       }, function (filename) {
           if (filename === false) return false;
           if (filename === "") {
               swal("Error", "You need to specify a filename.", "error");
               return false;
           }
-          if (!filename.endsWith(".wfsim") && !filename.endsWith(".WFSIM")) {
-              swal("Error", "The extension must be .wfsim", "error");
+          if (!filename.endsWith(".le") && !filename.endsWith(".LE")) {
+              swal("Error", "The extension must be .le", "error");
               return false;
           }
 
@@ -1071,12 +1019,12 @@ function connCreate(sourcePort, targetPort, userData) {
 
 $(window).load(function () {
     /* Init Page */
-    var width = window.innerWidth;
+    var width = window.innerWidth-110-400;
     var height = window.innerHeight-136;
 
     defineCustoms();
 
-    $('#graph').attr('style','width: ' + width + 'px; height: ' + height + 'px; background-color: #ffffff;');
+    $('#graph').attr('style','width: ' + width + 'px; height: ' + height + 'px; background-color: #ffffff; margin-left:120px; margin-rigth: 10px;');
 
     window.addEventListener("contextmenu", function(e) { e.preventDefault(); });
 
@@ -1105,11 +1053,6 @@ $(window).load(function () {
     $('#exportWorkflowButton').click(function(){
       exportJSON();
     });
-
-    chrome.storage.local.get('settings', function (result) {
-        if (result.settings.account != "" && result.settings.account !== undefined)
-            $('#workflowToolbarCloudUpload').attr('style','display: block;');
-    });
 });
 
 function initCanvas() {
@@ -1134,8 +1077,6 @@ function initCanvas() {
         if (event.figure!==null) {
             figure = event.figure;
             selectedFigure(event.figure);
-        } else {
-            deselectedFigure(event.figure);
         }
     });
 
@@ -1174,7 +1115,7 @@ function createNewWorkflowFromEvents(result) {
     }
     for (var i=0; i<result.events.length; i++) {
         var node = addNode(result.events[i]);
-        var nodex = 295 + Math.min(80*(i%24), 80*12);
+        var nodex = 0 + Math.min(80*(i%24), 80*12);
         nodey = 80 + 160*Math.floor(i/24);
         if (i%24 > 11) {
             nodey += 80;
@@ -1214,11 +1155,6 @@ function createNewWorkflowFromEvents(result) {
     canvasResize();
 }
 
-$('#nodeLinkPanelX').click(function(){
-    $('#workflowsidepanel').attr('style','display: none;');
-    canvas.setCurrentSelection([]);
-});
-
 $('#workflowToolbarAddNode').click(function(){
     var heights = canvas.getFigures().clone().map(function(f){ return f.getAbsoluteY();});
     var y = Math.max.apply(Math,heights.asArray()) + 80;
@@ -1227,7 +1163,7 @@ $('#workflowToolbarAddNode').click(function(){
       evt: 'end_recording',
       time: 0
     })
-    var command = new draw2d.command.CommandAdd(canvas, node, 775, y);
+    var command = new draw2d.command.CommandAdd(canvas, node, 600, y);
     canvas.getCommandStack().execute(command);
 
     nodes.push(node);
