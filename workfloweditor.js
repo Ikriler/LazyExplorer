@@ -404,7 +404,7 @@ function selectedFigure(figure) {
       $('#sidePanelTypeSelect').attr('disabled','disabled');
       $('#sidePanelTypeSelect').html(
         "<option value='begin_recording' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-runner.png\"/>Begin Recording</span>'>Begin Recording</option>"
-      ).selectpicker('refresh');
+      );
       $('#sidePanelTypeSelect').attr('disabled','disabled');
     } else {
       var selecthtml = "";
@@ -420,7 +420,7 @@ function selectedFigure(figure) {
             selecthtml += "</optgroup>";
         }
       }
-      $('#sidePanelTypeSelect').html(selecthtml).selectpicker('refresh');
+      $('#sidePanelTypeSelect').html(selecthtml);
     }
   } else {
     $('#sidePanelTitle').text("Link Properties");
@@ -432,7 +432,7 @@ function selectedFigure(figure) {
         "<option value='wait_for_title' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-title.png\"/>Wait For Title</span>'>Wait For Title</option>" +
         "<option value='test_expression' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-equation.png\"/>Test Expression</span>'>Test Expression</option>" +
         "<option value='wait_for_time' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-wall-clock.png\"/>Wait For Time</span>'>Wait For Time</option>"
-      ).selectpicker('refresh');
+      );
     else if (figure.userData.evt == "wait_for_title")
       $('#sidePanelTypeSelect').html(
         "<option value='timer' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-timer-clock.png\"/>Timer</span>'>Timer</option>" +
@@ -440,7 +440,7 @@ function selectedFigure(figure) {
         "<option selected='selected' value='wait_for_title' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-title.png\"/>Wait For Title</span>'>Wait For Title</option>" +
         "<option value='test_expression' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-equation.png\"/>Test Expression</span>'>Test Expression</option>" +
         "<option value='wait_for_time' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-wall-clock.png\"/>Wait For Time</span>'>Wait For Time</option>"
-      ).selectpicker('refresh');
+      );
     else if (figure.userData.evt == "timer")
       $('#sidePanelTypeSelect').html(
         "<option selected='selected' value='timer' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-timer-clock.png\"/>Timer</span>'>Timer</option>" +
@@ -448,7 +448,7 @@ function selectedFigure(figure) {
         "<option value='wait_for_title' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-title.png\"/>Wait For Title</span>'>Wait For Title</option>" +
         "<option value='test_expression' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-equation.png\"/>Test Expression</span>'>Test Expression</option>" +
         "<option value='wait_for_time' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-wall-clock.png\"/>Wait For Time</span>'>Wait For Time</option>"
-      ).selectpicker('refresh');
+      );
     else if (figure.userData.evt == "test_expression")
       $('#sidePanelTypeSelect').html(
         "<option value='timer' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-timer-clock.png\"/>Timer</span>'>Timer</option>" +
@@ -456,7 +456,7 @@ function selectedFigure(figure) {
         "<option value='wait_for_title' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-title.png\"/>Wait For Title</span>'>Wait For Title</option>" +
         "<option selected='selected' value='test_expression' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-equation.png\"/>Test Expression</span>'>Test Expression</option>" +
         "<option value='wait_for_time' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-wall-clock.png\"/>Wait For Time</span>'>Wait For Time</option>"
-      ).selectpicker('refresh');
+      );
     else if (figure.userData.evt == "wait_for_time") {
       $('#sidePanelTypeSelect').html(
         "<option value='timer' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-timer-clock.png\"/>Timer</span>'>Timer</option>" +
@@ -464,7 +464,7 @@ function selectedFigure(figure) {
         "<option value='wait_for_title' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-title.png\"/>Wait For Title</span>'>Wait For Title</option>" +
         "<option value='test_expression' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-equation.png\"/>Test Expression</span>'>Test Expression</option>" +
         "<option selected='selected' value='wait_for_time' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-wall-clock.png\"/>Wait For Time</span>'>Wait For Time</option>"
-      ).selectpicker('refresh');
+      );
     }
   }
 

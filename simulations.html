@@ -2,37 +2,18 @@
 <html>
   <head lang="en">
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no"
-    />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>LazyExplorer</title>
-
-    <link
-      rel="stylesheet"
-      href="/theme/css/lib/font-awesome/font-awesome.min.css"
-    />
     <link
       rel="stylesheet"
       href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"
     />
-    <link rel="stylesheet" href="/theme/css/main.css" />
     <link
       rel="stylesheet"
       href="/theme/css/lib/bootstrap-min/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="/theme/css/custom.css" />
   </head>
 
   <body class="horizontal-navigation">
-    <input
-      id="eventfileContainer"
-      accept=".WFIRE"
-      type="file"
-      style="display: none"
-    />
-
     <nav
       class="navbar p-3 navbar-dark bg-dark navbar-expand-lg mb-sm-3 justify-content-center"
     >
@@ -69,7 +50,6 @@
           <div class="col-md-9">
             <section class="box-typical proj-page">
               <section class="proj-page-section proj-page-header">
-                <div class="title">Simulation Log</div>
                 <div style="text-align: center">
                   <img
                     id="screenshot"
@@ -86,6 +66,7 @@
                 <header class="proj-page-subtitle padding-sm">
                   <h3>Timing</h3>
                 </header>
+                
                 <div class="tbl">
                   <div class="tbl-row">
                     <div class="tbl-cell">Recording Time</div>
@@ -99,6 +80,7 @@
                     ></div>
                   </div>
                 </div>
+
                 <div class="progress-compact-style">
                   <progress
                     id="progressBar"
@@ -111,12 +93,6 @@
                   <small id="terminationReason" style="display: none"></small>
                 </div>
               </section>
-              <!-- <section class="proj-page-section proj-page-labels">
-                <header class="proj-page-subtitle padding-sm">
-                  <h3>Attributes</h3>
-                </header>
-                <div id="tags"></div>
-              </section> -->
               <section class="proj-page-section proj-page-dates">
                 <header class="proj-page-subtitle padding-sm">
                   <h3>Dates</h3>
@@ -133,11 +109,6 @@
                 </div>
               </section>
               <section class="proj-page-section text-center">
-                <!-- <ul class="proj-page-actions-list">
-                  <li class="text-center">
-                    <a id="deleteSimulationLink" href="#" class="btn btn-danger">Delete simulation</a>
-                  </li>
-                </ul> -->
                 <a id="deleteSimulationLink" href="#" class="btn btn-danger">Delete simulation</a>
               </section>
             </section>
@@ -153,8 +124,7 @@
                   </div>
                 </div>
               </header>
-              <div class="box-typical-body">
-                <div class="table-responsive">
+              <div class="container-fluid">
                   <table class="table table-hover">
                     <thead>
                       <tr>
@@ -187,7 +157,6 @@
                       </tr>
                     </tbody>
                   </table>
-                </div>
               </div>
             </section>
           </div>

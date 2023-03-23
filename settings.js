@@ -2,12 +2,6 @@ function updateSettings() {
     chrome.storage.local.set({settings: all_settings});
 }
 
-// const buttonsActions = {
-//     '#setting-record-mousedown': all_settings.recordmousedown,
-//     '#setting-record-mouseup': all_settings.recordmouseout,
-//     '#setting-record-mouseover': all_settings.recordmouseover,
-// }
-
 chrome.storage.local.get('settings', function (settings) {
     all_settings = settings.settings;
     if (all_settings.recordmousedown)
@@ -238,13 +232,3 @@ $('#setting-recordnative').change(function() {
     all_settings.recordnative = $(this).is(":checked");
     updateSettings();
 });
-// chrome.runtime.sendMessage(null, {
-//     'action': 'getHelperStatus'
-// }, null, function(response) {
-//     if (response.helperversion && response.native_port)
-//         helperisforsureinstalled = true; // do nothing
-//     else {
-//         $('#setting-recordnative').attr('disabled','disabled');
-//         $('#recordnative-warning').attr('style','');
-//     }
-// });

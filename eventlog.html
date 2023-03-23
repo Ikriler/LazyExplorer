@@ -1,98 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>LazyExplorer</title>
+    <head>
+        <meta charset="UTF-8" />
+        <title>LazyExplorer</title>
+        <link
+            rel="stylesheet"
+            href="/theme/css/lib/bootstrap-min/bootstrap.min.css"
+        />
+    </head>
 
-    <link rel="stylesheet" href="/theme/css/lib/font-awesome/font-awesome.min.css">
-    <link rel="stylesheet" href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"/>
-    <link rel="stylesheet" href="/theme/css/main.css">
-    <link
-    rel="stylesheet"
-    href="/theme/css/lib/bootstrap-min/bootstrap.min.css"
-  />
-    <link rel="stylesheet" href="/theme/css/custom.css">
-</head>
-
-<body class="horizontal-navigation">
-<input id="eventfileContainer" accept=".WFIRE" type="file" style="display: none;" />
-
-<nav class="navbar p-3 navbar-dark bg-dark navbar-expand-lg mb-sm-3 justify-content-center">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/simulationlog.html"
-          >Simulation Log</a
+    <body class="horizontal-navigation">
+        <nav
+            class="navbar p-3 navbar-dark bg-dark navbar-expand-lg mb-sm-3 justify-content-center"
         >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="/eventlog.html">Event Log</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/workfloweditor.html">Workflow Editor</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/settings.html">Settings</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/favorites.html">Favorites</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="/scheduled.html">Scheduled</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/diskusage.html">Disk Usage</a>
-      </li>
-    </ul>
-</nav>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/simulationlog.html"
+                        >Simulation Log</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/eventlog.html"
+                        >Event Log</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/workfloweditor.html"
+                        >Workflow Editor</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/settings.html">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/favorites.html">Favorites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/scheduled.html">Scheduled</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/diskusage.html">Disk Usage</a>
+                </li>
+            </ul>
+        </nav>
 
-<div>
-    <div class="container-fluid">
-        <section class="box-typical">
-            <header class="box-typical-header">
-                <div class="tbl-row">
-                    <div class="tbl-cell tbl-cell-title">
-                        <h3>Event Log</h3>
-                    </div>
-                </div>
-            </header>
-            <div class="box-typical-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th style="min-width: 160px;">Type</th>
-                            <th>Details</th>
-                            <th colspan="3">Additional Data</th>
-                        </tr>
-                        </thead>
-                        <tbody id="events">
-                        <tr>
-                            <td colspan="7" class="table-check">
-                                <center>Loading events...</center>
-                                <br />
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-    </div>
-</div>
+        <div class="container-fluid">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="min-width: 160px">Type</th>
+                        <th>Details</th>
+                        <th colspan="3">Additional Data</th>
+                    </tr>
+                </thead>
+                <tbody id="events">
+                    <tr>
+                        <td colspan="7" class="table-check">
+                            <center>Loading events...</center>
+                            <br />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script src="/theme/js/lib/jquery/jquery.min.js"></script>
+        <script src="/theme/js/lib/tether/tether.min.js"></script>
+        <script src="/theme/js/lib/bootstrap/bootstrap.min.js"></script>
+        <script src="/theme/js/lib/bootstrap-min/bootstrap.min.js"></script>
+        <script src="/theme/js/plugins.js"></script>
 
-<script src="/theme/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
-<script src="/theme/js/lib/jquery/jquery.min.js"></script>
-<script src="/theme/js/lib/tether/tether.min.js"></script>
-<script src="/theme/js/lib/bootstrap/bootstrap.min.js"></script>
-<script src="/theme/js/lib/bootstrap-min/bootstrap.min.js"></script>
-<script src="/theme/js/plugins.js"></script>
-
-<script src="/theme/js/app.js"></script>
-<script src="/lib/aes.js"></script>
-<script src="/log_helper.js"></script>
-<script src="/eventlog.js"></script>
-<script src="/app.js"></script>
-</body>
+        <script src="/theme/js/app.js"></script>
+        <script src="/lib/aes.js"></script>
+        <script src="/log_helper.js"></script>
+        <script src="/eventlog.js"></script>
+        <script src="/app.js"></script>
+    </body>
 </html>

@@ -2,20 +2,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>LazyExplorer</title>
-
-    <link rel="stylesheet" href="/theme/css/lib/font-awesome/font-awesome.min.css">
     <link rel="stylesheet" href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"/>
-    <link rel="stylesheet" href="/theme/css/separate/vendor/bootstrap-select/bootstrap-select.min.css">
-    <link rel="stylesheet" href="/theme/css/main.css">
-    <link
-    rel="stylesheet"
-    href="/theme/css/lib/bootstrap-min/bootstrap.min.css"
-  />
-    <link rel="stylesheet" href="/theme/css/custom.css">
-    
+    <link rel="stylesheet" href="/theme/css/lib/bootstrap-min/bootstrap.min.css"/>
     <link rel="stylesheet" href="/enjoyhint/enjoyhint.css">
 </head>
 
@@ -53,29 +42,30 @@
 
 
 <div class="row">
-  <div class="col-sm-1">
+  <div class="col-sm-2">
     <div class="" style="margin: 10px; position: fixed;">
       <div aria-label="Toolbar">
           <div aria-label="Event Actions" class="d-flex flex-column">
-              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Add Node" id="workflowToolbarAddNode" type="button" class="btn btn-default-outline m-1"><i class="fa fa-plus-square-o"></i></button>
-              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Clone Selection" id="workflowToolbarClone" type="button" class="btn btn-default-outline m-1"><i class="fa fa-copy"></i></button>
-              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Undo" id="workflowToolbarUndo" type="button" class="btn btn-default-outline m-1"><i class="fa fa-reply"></i></button>
-              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Redo" id="workflowToolbarRedo" type="button" class="btn btn-default-outline m-1"><i class="fa fa-share"></i></button>
-              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Item(s)" id="workflowToolbarDelete" type="button" class="btn btn-default-outline m-1"><i class="fa fa-trash-o"></i></button>
-              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Start Simulation" id="workflowToolbarInitSimulation" type="button" class="btn btn-default-outline m-1"><i class="fa fa-play-circle-o"></i></button>
-              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Favorite Workflow" id="workflowToolbarFavorite" type="button" class="btn btn-default-outline m-1"><i class="fa fa-star"></i></button>
-              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Reset from Event Log" id="workflowToolbarNew" type="button" class="btn btn-default-outline m-1"><i class="fa fa-file-o"></i></button>
-              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Import Workflow" id="workflowToolbarImport" type="button" class="btn btn-default-outline m-1"><i class="fa fa-folder-open-o"></i></button>
-              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Export Workflow" id="workflowToolbarSave" type="button" class="btn btn-default-outline m-1"><i class="fa fa-save"></i></button>
+              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Add Node" id="workflowToolbarAddNode" type="button" class="btn btn-default-outline m-1"><i class="fa fa-plus-square-o"></i>Add Node</button>
+              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Clone Selection" id="workflowToolbarClone" type="button" class="btn btn-default-outline m-1"><i class="fa fa-copy"></i>Clone Selection</button>
+              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Undo" id="workflowToolbarUndo" type="button" class="btn btn-default-outline m-1"><i class="fa fa-reply"></i>Undo</button>
+              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Redo" id="workflowToolbarRedo" type="button" class="btn btn-default-outline m-1"><i class="fa fa-share"></i>Redo</button>
+              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove Item(s)" id="workflowToolbarDelete" type="button" class="btn btn-default-outline m-1"><i class="fa fa-trash-o"></i>Remove Item(s)</button>
+              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Start Simulation" id="workflowToolbarInitSimulation" type="button" class="btn btn-default-outline m-1"><i class="fa fa-play-circle-o"></i>Start Simulation</button>
+              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Favorite Workflow" id="workflowToolbarFavorite" type="button" class="btn btn-default-outline m-1"><i class="fa fa-star"></i>Favorite Workflow</button>
+              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Reset from Event Log" id="workflowToolbarNew" type="button" class="btn btn-default-outline m-1"><i class="fa fa-file-o"></i>Reset from Event Log</button>
+              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Import Workflow" id="workflowToolbarImport" type="button" class="btn btn-default-outline m-1"><i class="fa fa-folder-open-o"></i>Import Workflow</button>
+              <button data-toggle="tooltip" data-placement="top" title="" data-original-title="Export Workflow" id="workflowToolbarSave" type="button" class="btn btn-default-outline m-1"><i class="fa fa-save"></i>Export Workflow</button>
           </div>
       </div>
   </div>
   </div>
-  <div class="col-sm-8">
+  <div class="col-sm-7">
     <div id="graphParent">
       <div id="graph"></div>
     </div>
   </div>
+
   <div class="col-sm-3">
     <div style="width: 300px; position: fixed; right: 0; top: 55px;">
       <div class="container-fluid" style="padding-top: 20px;">
@@ -83,15 +73,16 @@
               <header class="card-header">
                   <span id="sidePanelTitle">Event Properties</span>
               </header>
-              <div class="card-block" style="min-height: 120px;">
+              <div class="card-block p-2" style="min-height: 120px;">
                   <p class="card-text">
                       <div id="sidePanelTypeSelectGroup">
                           <label class="form-label semibold" for="sidePanelTypeSelect">Type</label>
-                          <select id="sidePanelTypeSelect" disabled="disabled" class="bootstrap-select">
+                          <select id="sidePanelTypeSelect" class="form-select" disabled="disabled">
+                            <option selected>No selected</option>
                           </select><br /><br />
                       </div>
                       <span id="sidePanelEventDetails"></span>
-                      <button id="deleteButtonSidepanel" type="button" class="btn btn-inline btn-danger">Delete</button>
+                      <button id="deleteButtonSidepanel" type="button" class="btn btn-inline btn-danger mt-2">Delete</button>
                   </p>
               </div>
           </section>
@@ -124,8 +115,6 @@
 <script src="/draw2d/lib/json2.js"></script>
 <script src="/draw2d/lib/pathfinding-browser.min.js"></script>
 <script src="/draw2d/src/draw2d.js"></script>
-
-<script src="/theme/js/lib/bootstrap-select/bootstrap-select.min.js"></script>
 
 <script src="/lib/csvparse.js"></script>
 <script src="/log_helper.js"></script>

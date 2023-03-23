@@ -20,8 +20,8 @@ function populateFavoritesTable() {
                 var innerHTML = "<tr id=\"favoriteRow" + (i+1) + "\">" +
                 "    <td>" + favorites[i].name + "</td>" +
                 "    <td>" +
-                "        <div class=\"checkbox-toggle\" style=\"margin-top: 8px; margin-bottom: 4px; margin-left: 36px;\">" +
-                "            <input type=\"checkbox\" id=\"check-toggle-" + (i+1) + "\"";
+                "        <div class=\"form-check form-switch\" style=\"margin-top: 8px; margin-bottom: 4px; margin-left: 36px;\">" +
+                "            <input class = \"form-check-input\" type=\"checkbox\" id=\"check-toggle-" + (i+1) + "\"";
                 if (favorites[i].rightclick)
                     innerHTML += " checked";
                 innerHTML += ">" +

@@ -8,7 +8,7 @@ var mappingData = {
         bgColor: '#FF6B6B',
         event_type: 'End Recording',
         icon: 'winner-runner-arriving-to-end-line.png',
-        optlabel: 'Workflow'
+        optbadge : 'Workflow'
     },
     setvar: {
         bgColor: '#3FB8AF',
@@ -19,13 +19,13 @@ var mappingData = {
         bgColor: '#F7734F',
         event_type: 'CSV Import',
         icon: 'csv-file-format-extension.png',
-        endoptlabel: true
+        endoptbadge : true
     },
     tabchange: {
         bgColor: '#9265C6',
         event_type: 'New/Change Tab',
         icon: 'web-tabs.png',
-        optlabel: 'Tabs'
+        optbadge : 'Tabs'
     },
     tabremove: {
         bgColor: '#8937B2',
@@ -36,13 +36,13 @@ var mappingData = {
         bgColor: '#924FAD',
         event_type: 'Switch Tabs',
         icon: 'web-tabs.png',
-        endoptlabel: true
+        endoptbadge : true
     },
     click: {
         bgColor: '#556270',
         event_type: 'Mouse Click',
         icon: 'cursor-1.png',
-        optlabel: 'Mouse'
+        optbadge : 'Mouse'
     },
     mousedown: {
         bgColor: '#F9E666',
@@ -63,13 +63,13 @@ var mappingData = {
         bgColor: '#A5A36C',
         event_type: 'Mouse Out',
         icon: 'mouse-pointer.png',
-        endoptlabel: true
+        endoptbadge : true
     },
     keypress: {
         bgColor: '#C5E0DC',
         event_type: 'Key Press',
         icon: 'keyboard-key-a.png',
-        optlabel: 'Keyboard'
+        optbadge : 'Keyboard'
     },
     keydown: {
         bgColor: '#5D97AF',
@@ -80,13 +80,13 @@ var mappingData = {
         bgColor: '#FC9D9A',
         event_type: 'Key Up',
         icon: 'square-arrow-up.png',
-        endoptlabel: true
+        endoptbadge : true
     },
     input: {
         bgColor: '#CBE86B',
         event_type: 'Data Input',
         icon: 'text-entry-box.png',
-        optlabel: 'Input'
+        optbadge : 'Input'
     },
     change: {
         bgColor: '#98462A',
@@ -97,13 +97,13 @@ var mappingData = {
         bgColor: '#A46583',
         event_type: 'Form Submit',
         icon: 'clicking-cursor.png',
-        endoptlabel: true
+        endoptbadge : true
     },
     clipboard_copy: {
         bgColor: '#005F6B',
         event_type: 'Clipboard Copy',
         icon: 'copy-document.png',
-        optlabel: 'Clipboard'
+        optbadge : 'Clipboard'
     },
     clipboard_cut: {
         bgColor: '#008C9E',
@@ -114,13 +114,13 @@ var mappingData = {
         bgColor: '#00B4CC',
         event_type: 'Clipboard Paste',
         icon: 'paste-from-clipboard.png',
-        endoptlabel: true
+        endoptbadge : true
     },
     ocr: {
         bgColor: '#99D8AB',
         event_type: 'Find Text',
         icon: 'search-circular-symbol-with-letters.png',
-        optlabel: 'Visual'
+        optbadge : 'Visual'
     },
     subimage: {
         bgColor: '#C47280',
@@ -131,13 +131,13 @@ var mappingData = {
         bgColor: '#7D7D7D',
         event_type: 'Take Screenshot',
         icon: 'photo-camera.png',
-        endoptlabel: true
+        endoptbadge : true
     },
     scroll: {
         bgColor: '#D9CEB2',
         event_type: 'Page Scroll',
         icon: 'scroll-bar.png',
-        optlabel: 'Other'
+        optbadge : 'Other'
     },
     focusin: {
         bgColor: '#4ECDC4',
@@ -168,14 +168,14 @@ var mappingData = {
         bgColor: '#D95B43',
         event_type: 'Text Select',
         icon: 'edit-line.png',
-        endoptlabel: true
+        endoptbadge : true
     },
     closewindow: {
         bgColor: '#688C40',
         event_type: 'Close Window',
         icon: 'window-close.png',
-        optlabel: 'Desktop Automation',
-        endoptlabel: true
+        optbadge : 'Desktop Automation',
+        endoptbadge : true
     },
 };
 
@@ -592,15 +592,15 @@ function populateEvents(result) {
             if (simulation_log.length > i) {
                 if (!simulation_log[i].results || simulation_log[i].results.length==1) {
                     if (!simulation_log[i].results || !simulation_log[i].results[0].error)
-                        innerHTML += "<td><span class=\"label label-success\">Success</span></td>";
+                        innerHTML += "<td><span class=\"badge  bg-success\">Success</span></td>";
                     else {
                         var eventerror = simulation_log[i].results[0].error;
-                        innerHTML += "<td><span class=\"label label-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"" + eventerror +"\">?</span></td>";
+                        innerHTML += "<td><span class=\"badge  bg-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"" + eventerror +"\">?</span></td>";
                     }
                 } else
-                    innerHTML += "<td><span class=\"label label-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"The simulation action was applied to a non-single element\">?</span></td>";
+                    innerHTML += "<td><span class=\"badge  bg-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"The simulation action was applied to a non-single element\">?</span></td>";
             } else
-                innerHTML += "<td><span class=\"label label-default\">Not Simulated</span></td>";
+                innerHTML += "<td><span class=\"badge  badge -default\">Not Simulated</span></td>";
         }
         innerHTML += "<td>" + event_details.event_type + "</td>" +
             "<td class=\"color-blue-grey-lighter\">" + event_details.event_data + "</td>";
@@ -623,9 +623,6 @@ function populateEvents(result) {
 
         rows_height += $(eventNode).height();
     }
-
-    if (events.length>0)
-        $('.jspContainer').height(rows_height + 43);
 }
 
 function populateSimulationEvents(result) {
@@ -648,15 +645,15 @@ function populateSimulationEvents(result) {
             if (simulation_log.length > i) {
                 if (!simulation_log[i].results || simulation_log[i].results.length==1) {
                     if (!simulation_log[i].results || !simulation_log[i].results[0] || !simulation_log[i].results[0].error)
-                        innerHTML += "<td><span class=\"label label-success\">Success</span></td>";
+                        innerHTML += `<td><span class="badge  bg-success">Success</span></td>`;
                     else {
                         var eventerror = simulation_log[i].results[0].error;
-                        innerHTML += "<td><span class=\"label label-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"" + eventerror +"\">?</span></td>";
+                        innerHTML += `<td><span class="badge  bg-danger">Error</span> <span class="hint-circle red" data-toggle="tooltip" data-placement="top" title="${eventerror}">?</span></td>`;
                     }
                 } else
-                    innerHTML += "<td><span class=\"label label-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"The simulation action was applied to a non-single element\">?</span></td>";
+                    innerHTML += "<td><span class=\"badge  bg-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"The simulation action was applied to a non-single element\">?</span></td>";
             } else
-                innerHTML += "<td><span class=\"label label-default\">Not Simulated</span></td>";
+                innerHTML += "<td><span class=\"badge  badge -default\">Not Simulated</span></td>";
         }
         innerHTML += "<td>" + event_details.event_type + "</td>" +
             "<td class=\"color-blue-grey-lighter\">" + event_details.event_data + "</td>";
@@ -684,9 +681,6 @@ function populateSimulationEvents(result) {
 
         rows_height += $(eventNode).height();
     }
-    // Refresh table UI
-    if (events.length>0)
-        $('.jspContainer').height(rows_height + 43);
 
     $('.imageDownload').click(function(e) {
         console.log(this.getAttribute('data-image'));
