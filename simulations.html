@@ -1,180 +1,183 @@
 <!DOCTYPE html>
 <html>
-  <head lang="en">
-    <meta charset="UTF-8" />
-    <title>LazyExplorer</title>
-    <link
-      rel="stylesheet"
-      href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/theme/css/lib/bootstrap-min/bootstrap.min.css"
-    />
-  </head>
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>LazyExplorer</title>
+        <link
+            rel="stylesheet"
+            href="/theme/css/lib/bootstrap-sweetalert/sweetalert.css"
+        />
+        <link
+            rel="stylesheet"
+            href="/theme/css/lib/bootstrap-min/bootstrap.min.css"
+        />
+    </head>
 
-  <body class="horizontal-navigation">
-    <nav
-      class="navbar p-3 navbar-dark bg-dark navbar-expand-lg mb-sm-3 justify-content-center"
-    >
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" href="/simulationlog.html"
-            >Simulation Log</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/eventlog.html">Event Log</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/workfloweditor.html">Workflow Editor</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/settings.html">Settings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/favorites.html">Favorites</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/scheduled.html">Scheduled</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/diskusage.html">Disk Usage</a>
-        </li>
-      </ul>
-    </nav>
+    <body class="horizontal-navigation">
+        <nav
+            class="navbar p-3 navbar-dark bg-dark navbar-expand-lg mb-sm-3 justify-content-center"
+        >
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/simulationlog.html"
+                        >Simulation Log</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/eventlog.html">Event Log</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/workfloweditor.html"
+                        >Workflow Editor</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/settings.html">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/favorites.html">Favorites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/scheduled.html">Scheduled</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/diskusage.html">Disk Usage</a>
+                </li>
+            </ul>
+        </nav>
 
-    <div>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-9">
-            <section class="box-typical proj-page">
-              <section class="proj-page-section proj-page-header">
-                <div style="text-align: center">
-                  <img
-                    id="screenshot"
-                    style="width: 100%; max-height: 1200px"
-                  />
+        <div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 m-auto">
+                        <table class="table m-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Recording</th>
+                                    <th scope="col">Simulation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Timing</th>
+                                    <td>
+                                        <div
+                                            id="recordTime"
+                                            class="tbl-cell tbl-cell-time"
+                                        ></div>
+                                    </td>
+                                    <td>
+                                        <div
+                                            id="simulationTime"
+                                            class="tbl-cell tbl-cell-time"
+                                        ></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Dates</th>
+                                    <td>
+                                        <div
+                                            id="recordDate"
+                                            class="tbl-cell"
+                                        ></div>
+                                    </td>
+                                    <td>
+                                        <div
+                                            id="simulationDate"
+                                            class="tbl-cell"
+                                        ></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="container-fluid text-center">
+                            <a
+                                id="deleteSimulationLink"
+                                href="#"
+                                class="btn btn-danger ms-auto"
+                                >Delete simulation</a
+                            >
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <section class="box-typical proj-page">
+                            <section class="proj-page-section proj-page-header">
+                                <div class="text-center m-5">
+                                    <img
+                                        id="screenshot"
+                                        style="width: 100%; max-height: 1200px"
+                                    />
+                                </div>
+                            </section>
+                        </section>
+                    </div>
                 </div>
-              </section>
-            </section>
-          </div>
-
-          <div class="col-md-3">
-            <section class="box-typical proj-page">
-              <section class="proj-page-section proj-page-time-info">
-                <header class="proj-page-subtitle padding-sm">
-                  <h3>Timing</h3>
-                </header>
-                
-                <div class="tbl">
-                  <div class="tbl-row">
-                    <div class="tbl-cell">Recording Time</div>
-                    <div id="recordTime" class="tbl-cell tbl-cell-time"></div>
-                  </div>
-                  <div class="tbl-row">
-                    <div class="tbl-cell">Simulation Time</div>
-                    <div
-                      id="simulationTime"
-                      class="tbl-cell tbl-cell-time"
-                    ></div>
-                  </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <section class="box-typical">
+                            <header class="box-typical-header">
+                                <div class="tbl-row">
+                                    <div class="tbl-cell tbl-cell-title">
+                                        <h3>Simulated Events</h3>
+                                    </div>
+                                </div>
+                            </header>
+                            <div class="container-fluid">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Result</th>
+                                            <th style="min-width: 160px">
+                                                Type
+                                            </th>
+                                            <th>Details</th>
+                                            <th colspan="3">Additional Data</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="events">
+                                        <tr>
+                                            <td colspan="7" class="table-check">
+                                                <center>
+                                                    Loading events...
+                                                </center>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-
-                <div class="progress-compact-style">
-                  <progress
-                    id="progressBar"
-                    class="progress progress-success"
-                    value=""
-                    max="100"
-                  ></progress>
-                </div>
-                <div style="text-align: center">
-                  <small id="terminationReason" style="display: none"></small>
-                </div>
-              </section>
-              <section class="proj-page-section proj-page-dates">
-                <header class="proj-page-subtitle padding-sm">
-                  <h3>Dates</h3>
-                </header>
-                <div class="tbl">
-                  <div class="tbl-row">
-                    <div class="tbl-cell tbl-cell-lbl">Recorded:</div>
-                    <div id="recordDate" class="tbl-cell"></div>
-                  </div>
-                  <div class="tbl-row">
-                    <div class="tbl-cell tbl-cell-lbl">Simulated:</div>
-                    <div id="simulationDate" class="tbl-cell"></div>
-                  </div>
-                </div>
-              </section>
-              <section class="proj-page-section text-center">
-                <a id="deleteSimulationLink" href="#" class="btn btn-danger">Delete simulation</a>
-              </section>
-            </section>
-          </div>
+            </div>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <section class="box-typical">
-              <header class="box-typical-header">
-                <div class="tbl-row">
-                  <div class="tbl-cell tbl-cell-title">
-                    <h3>Simulated Events</h3>
-                  </div>
-                </div>
-              </header>
-              <div class="container-fluid">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Result</th>
-                        <th style="min-width: 160px">Type</th>
-                        <th>Details</th>
-                        <th colspan="3">Additional Data</th>
-                      </tr>
-                    </thead>
-                    <tbody id="events">
-                      <tr>
-                        <td colspan="7" class="table-check">
-                          <center>Loading events...</center>
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-              </div>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <script src="/theme/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
-    <script src="/theme/js/lib/jquery/jquery.min.js"></script>
-    <script src="/theme/js/lib/tether/tether.min.js"></script>
-    <script src="/theme/js/lib/bootstrap/bootstrap.min.js"></script>
-    <script src="/theme/js/lib/bootstrap-min/bootstrap.min.js"></script>
-    <script src="/theme/js/plugins.js"></script>
+        <script src="/theme/js/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
+        <script src="/theme/js/lib/jquery/jquery.min.js"></script>
+        <script src="/theme/js/lib/tether/tether.min.js"></script>
+        <script src="/theme/js/lib/bootstrap/bootstrap.min.js"></script>
+        <script src="/theme/js/lib/bootstrap-min/bootstrap.min.js"></script>
+        <script src="/theme/js/plugins.js"></script>
 
-    <script src="/theme/js/app.js"></script>
-    <script src="/lib/aes.js"></script>
-    <script src="/log_helper.js"></script>
-    <script src="/simulations.js"></script>
-    <script src="/app.js"></script>
-  </body>
+        <script src="/theme/js/app.js"></script>
+        <script src="/lib/aes.js"></script>
+        <script src="/log_helper.js"></script>
+        <script src="/simulations.js"></script>
+        <script src="/app.js"></script>
+    </body>
 </html>

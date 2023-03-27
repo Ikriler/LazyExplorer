@@ -44,7 +44,7 @@
     "128": "icons/icon-128.png"
   },
   "background":  {
-    "scripts": ["tesseract/tesseract.js", "lib/jquery-2.2.4.min.js", "main.js", "lib/aes.js", "lib/exprparse.js", "fuzzyset/fuzzyset.js"]
+    "scripts": ["lib/jquery-2.2.4.min.js", "main.js", "lib/aes.js", "lib/exprparse.js"]
   },
   "content_scripts": [
     {

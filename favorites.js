@@ -37,10 +37,10 @@ function populateFavoritesTable() {
                 innerHTML += "</td>" +
                 "    <td>" + formatDate(favorites[i].time) + "</td>" +
                 "    <td>" +
-                "        <a href=\"#\" id=\"renameFavorite" + (i+1) + "\">Rename</a>&nbsp;&nbsp;" +
-                "        <a href=\"#\" id=\"restoreFavorite" + (i+1) + "\">Restore</a>&nbsp;&nbsp;" +
-                "        <a href=\"#\" id=\"shortcutFavorite" + (i+1) + "\">Set Shortcut</a>&nbsp;&nbsp;" +
-                "        <a href=\"#\" id=\"deleteFavorite" + (i+1) + "\">Delete</a>" +
+                "        <a class=\"text-white btn btn-info\" href=\"#\" id=\"renameFavorite" + (i+1) + "\">Rename</a>&nbsp;&nbsp;" +
+                "        <a class=\"text-white btn btn-info\" href=\"#\" id=\"restoreFavorite" + (i+1) + "\">Restore</a>&nbsp;&nbsp;" +
+                "        <a class=\"text-white btn btn-info\" href=\"#\" id=\"shortcutFavorite" + (i+1) + "\">Set Shortcut</a>&nbsp;&nbsp;" +
+                "        <a class=\"text-white btn btn-danger\" href=\"#\" id=\"deleteFavorite" + (i+1) + "\">Delete</a>" +
                 "    </td>" +
                 "</tr>";
 

@@ -581,49 +581,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         });
     }
 });
-
-// if (typeof InstallTrigger === 'undefined') {
-//     chrome.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
-//         if (request.action == "registrationStatus") {
-//             if (bgSettings != null) {
-//                 sendResponse({
-//                     "success": true,
-//                     "account": bgSettings.account,
-//                     "cloudapikey": bgSettings.cloudapikey,
-//                     "version": chrome.runtime.getManifest().version
-//                 });
-//             } else {
-//                 sendResponse({
-//                     "success": false,
-//                     "version": chrome.runtime.getManifest().version
-//                 });
-//             }
-//         } else if (request.action == "openExtension") {
-//             var windowWidth = 1280;
-//             var windowHeight = 800;
-//             chrome.windows.create({
-//                 url: chrome.extension.getURL(request.url),
-//                 type: "popup",
-//                 width: windowWidth,
-//                 height: windowHeight,
-//                 left: screen.width/2-(windowWidth/2),
-//                 top: screen.height/2-(windowHeight/2)
-//             });
-//         } else if (request.action == "registerExtension") {
-//             chrome.storage.local.get('settings', function (settings) {
-//                 bgSettings = settings.settings;
-//                 bgSettings.account = request.account;
-//                 bgSettings.cloudapikey = request.cloudapikey;
-//                 chrome.storage.local.set({settings: bgSettings});
-//             });
-//             sendResponse({
-//                 "success": true,
-//                 "version": chrome.runtime.getManifest().version
-//             });
-//         }
-//     });
-// }
-
 function setContextMenus() {
 	chrome.storage.local.get('favorites', function (result) {
         var favorites = result.favorites;
@@ -1015,81 +972,6 @@ function processEvent(node) {
         logResultAndRaceLinks(result, false, node);
     }).catch(function(result){
         logResultAndRaceLinks(result, true, node);
-    });
-}
-
-function processOCR(imagedata, node, resolve, reject) {
-    Tesseract.recognize(imagedata, {
-        lang: 'eng'
-    }).then(function(tessaresult){
-        console.log(tessaresult);
-
-        var fuzz = FuzzySet();
-        var bestmatch = null;
-        if (node.userData.evt_data.useFuzzyMatch) {
-            for (var i=0; i<tessaresult.words.length; i++) {
-                fuzz.add(tessaresult.words[i].text);
-            }
-            bestmatch = fuzz.get(node.userData.evt_data.ocrsearchterm, null, 0.3);
-        }
-
-        var word_matches = [];
-        for (var i=0; i<tessaresult.words.length; i++) {
-            if (node.userData.evt_data.useFuzzyMatch) {
-                if (bestmatch && bestmatch[0][1] == tessaresult.words[i].text) {
-                    word_matches.push(tessaresult.words[i]);
-                    break;
-                }
-            } else if (tessaresult.words[i].text.includes(node.userData.evt_data.ocrsearchterm)) {
-                word_matches.push(tessaresult.words[i]);
-            }
-        }
-        
-        if (word_matches.length > 0) {
-            var matchtext = "";
-            if (node.userData.evt_data.useFuzzyMatch) {
-                matchtext = "\"" + bestmatch[0][1] + "\" (" + parseInt(bestmatch[0][0]*100) + "% match)";
-            } else {
-                matchtext = "\"" + node.userData.evt_data.ocrsearchterm + "\"";
-            }
-
-            if (node.userData.useOSInput) {
-                simulation_variables['_FINDTEXT_X'] = parseInt((word_matches[0].bbox.x0 + (word_matches[0].bbox.x1 - word_matches[0].bbox.x0)/2)/window.devicePixelRatio);
-                simulation_variables['_FINDTEXT_Y'] = parseInt((word_matches[0].bbox.y0 + (word_matches[0].bbox.y1 - word_matches[0].bbox.y0)/2)/window.devicePixelRatio);
-                resolve({
-                    error: false,
-                    results: ["Matched " + matchtext + " at (" + simulation_variables['_FINDTEXT_X'] + "," + simulation_variables['_FINDTEXT_Y'] + ") in relation to the screen"],
-                    id: node.id,
-                    time: Date.now()
-                });
-            } else {
-                simulation_variables['_FINDTEXT_X'] = parseInt((word_matches[0].bbox.x0 + (word_matches[0].bbox.x1 - word_matches[0].bbox.x0)/2)/window.devicePixelRatio);
-                simulation_variables['_FINDTEXT_Y'] = parseInt((word_matches[0].bbox.y0 + (word_matches[0].bbox.y1 - word_matches[0].bbox.y0)/2)/window.devicePixelRatio);
-                runCode("getCSSPath(document.elementFromPoint(" + simulation_variables['_FINDTEXT_X'] + ", " + simulation_variables['_FINDTEXT_Y'] + "), false)", node).then(function(result){
-                    simulation_variables['_FINDTEXT_SELECTOR'] = result.results[0];
-                    resolve({
-                        error: false,
-                        results: ["Matched " + matchtext + " at (" + simulation_variables['_FINDTEXT_X'] + "," + simulation_variables['_FINDTEXT_Y'] + ") with element selector " + simulation_variables['_FINDTEXT_SELECTOR']],
-                        id: node.id,
-                        time: Date.now()
-                    });
-                }).catch(function(result){
-                    reject({
-                        error: true,
-                        results: ["Matched " + matchtext + " at (" + simulation_variables['_FINDTEXT_X'] + "," + simulation_variables['_FINDTEXT_Y'] + ") but could not identify element at that position"],
-                        id: node.id,
-                        time: Date.now()
-                    });
-                });
-            }
-        } else {
-            resolve({
-                error: true,
-                results: ["Could not find a match for the search term"],
-                id: node.id,
-                time: Date.now()
-            });
-        }
     });
 }
 
@@ -1928,27 +1810,6 @@ function execEvent(node) {
                     });
                 });
             });
-        case 'ocr':
-            return new Promise(function(resolve, reject) {
-                if (node.userData.useOSInput) {
-                    latestNativeScreenshot = null;
-                    sendNativeMessage({
-                        'action': 'screenshot'
-                    });
-                    nativeInterval = setInterval(function(node, resolve, reject){
-                        if (latestNativeScreenshot) {
-                            clearInterval(nativeInterval);
-                            processOCR(latestNativeScreenshot, node, resolve, reject);
-                        }
-                    }, 100, node, resolve, reject);
-                } else {
-                    chrome.tabs.captureVisibleTab(new_window.id,{
-                        "format": "png"
-                    }, function(imagedata){
-                        processOCR(imagedata, node, resolve, reject);
-                    });
-                }
-            });
         case 'subimage':
             return new Promise(function(resolve, reject) {
                 if (node.userData.useOSInput) {
@@ -2617,10 +2478,3 @@ function findSubimage(haystackSrc, needleSrc, color_variance, node, resolve, rej
     needleImg.crossOrigin = "Anonymous";
     needleImg.src = needleSrc;
 }
-
-/* Start Tesseract */
-window.Tesseract = Tesseract.create({
-    workerPath: chrome.extension.getURL('tesseract/worker.js'),
-    langPath: chrome.extension.getURL('tesseract/'),
-    corePath: chrome.extension.getURL('tesseract/index.js'),
-});

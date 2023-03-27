@@ -116,12 +116,6 @@ var mappingData = {
         icon: 'paste-from-clipboard.png',
         endoptbadge : true
     },
-    ocr: {
-        bgColor: '#99D8AB',
-        event_type: 'Find Text',
-        icon: 'search-circular-symbol-with-letters.png',
-        optbadge : 'Visual'
-    },
     subimage: {
         bgColor: '#C47280',
         event_type: 'Find Image',
@@ -533,12 +527,12 @@ function readableEventDetail(event, simulation_log_results) {
 
     if (event.evt_data) {
         if (event.evt_data.inFrame) {
-            event_type += " <span class='hint-circle blue' data-toggle='tooltip' data-placement='top' title='Detected this event within a frame'>?</span>";
+            event_type += " <span class='hint-circle blue' data-toggle='tooltip' data-placement='top' title='Detected this event within a frame'></span>";
         }
 
         if (event.evt_data.csspathfull) {
             if (event.evt_data.csspathfull != "html > body") {
-                event_type += " <span class='hint-circle grey' data-toggle='tooltip' data-placement='top' title='" + event.evt_data.csspathfull + "'>?</span>";
+                event_type += " <span class='hint-circle grey' data-toggle='tooltip' data-placement='top' title='" + event.evt_data.csspathfull + "'></span>";
             }
         }
     }
@@ -595,12 +589,12 @@ function populateEvents(result) {
                         innerHTML += "<td><span class=\"badge  bg-success\">Success</span></td>";
                     else {
                         var eventerror = simulation_log[i].results[0].error;
-                        innerHTML += "<td><span class=\"badge  bg-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"" + eventerror +"\">?</span></td>";
+                        innerHTML += "<td class=\"text-center\"><span class=\"badge  bg-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"" + eventerror +"\"></span></td>";
                     }
                 } else
-                    innerHTML += "<td><span class=\"badge  bg-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"The simulation action was applied to a non-single element\">?</span></td>";
+                    innerHTML += "<td class=\"text-center\"><span class=\"badge bg-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"The simulation action was applied to a non-single element\"></span></td>";
             } else
-                innerHTML += "<td><span class=\"badge  badge -default\">Not Simulated</span></td>";
+                innerHTML += "<td><span class=\"badge badge -default\">Not Simulated</span></td>";
         }
         innerHTML += "<td>" + event_details.event_type + "</td>" +
             "<td class=\"color-blue-grey-lighter\">" + event_details.event_data + "</td>";
@@ -645,13 +639,13 @@ function populateSimulationEvents(result) {
             if (simulation_log.length > i) {
                 if (!simulation_log[i].results || simulation_log[i].results.length==1) {
                     if (!simulation_log[i].results || !simulation_log[i].results[0] || !simulation_log[i].results[0].error)
-                        innerHTML += `<td><span class="badge  bg-success">Success</span></td>`;
+                        innerHTML += `<td class=\"text-center\"><span class="badge  bg-success">Success</span></td>`;
                     else {
                         var eventerror = simulation_log[i].results[0].error;
-                        innerHTML += `<td><span class="badge  bg-danger">Error</span> <span class="hint-circle red" data-toggle="tooltip" data-placement="top" title="${eventerror}">?</span></td>`;
+                        innerHTML += `<td class=\"text-center\"><span class="badge bg-danger">Error</span> <span class="hint-circle red" data-toggle="tooltip" data-placement="top" title="${eventerror}"></span></td>`;
                     }
                 } else
-                    innerHTML += "<td><span class=\"badge  bg-danger\">Error</span> <span class=\"hint-circle red\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"The simulation action was applied to a non-single element\">?</span></td>";
+                    innerHTML += "<td class=\"text-center\"><span class=\"badge  bg-danger\">Error</td>";
             } else
                 innerHTML += "<td><span class=\"badge  badge -default\">Not Simulated</span></td>";
         }

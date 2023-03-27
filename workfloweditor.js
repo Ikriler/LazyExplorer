@@ -228,20 +228,6 @@ function getEventOptionsHtml(userdata) {
     "    <input type=\"text\" required class=\"form-control event-detail\" data-event-detail=\"searchterm\" id=\"searchterm\" value=\"" + escapeOrDefault(userdata.evt_data.searchterm,"example.com") + "\">" +
     "    <br />" +
     "</div>";
-  } else if (userdata.evt == "ocr") {
-    return "<div class=\"form-group\"><label class=\"form-label semibold\" for=\"ocrsearchterm\">Search Term</label>" +
-    "    <input type=\"text\" required class=\"form-control event-detail\" data-event-detail=\"ocrsearchterm\" id=\"ocrsearchterm\" value=\"" + escapeOrDefault(userdata.evt_data.ocrsearchterm,"") + "\">" +
-    "    <br />" +
-    "    <label class=\"form-label semibold\" for=\"event_useFuzzyMatch\">Options</label>" +
-    "    <div class=\"checkbox-bird\">" +
-		"      <input type=\"checkbox\" id=\"event_useFuzzyMatch\">" +
-		"      <label for=\"event_useFuzzyMatch\">Use Fuzzy Matching</label>" +
-    "    </div>" +
-    "    <div class=\"checkbox-bird\">" +
-		"      <input type=\"checkbox\" id=\"event_useOSInput\">" +
-		"      <label for=\"event_useOSInput\">Use Desktop Automation</label>" +
-	  "    </div>" +
-    "</div>";
   } else if (userdata.evt == "subimage") {
     return "<div class=\"form-group\"><label class=\"form-label semibold\" for=\"subimg\">Search Image</label>" +
     (userdata.evt_data.subimgfile ? "    <div id=\"subimg-files\"><img style=\"max-width: 100%; max-height: 200px;\" src=\"" + userdata.evt_data.subimgresults + "\" /><br /><small><a id=\"clearSubimg\">Clear</a></small><br /></div><div style=\"display: none;\" id=\"subimg-drop-zone\"><span class=\"btn btn-file\"><span><i class=\"fa fa-upload\"></i> Choose Image</span><input id=\"event_subimgfile\" type=\"file\" name=\"event_subimgfile[]\"></span></div>" : "    <div id=\"subimg-files\"></div><div id=\"subimg-drop-zone\"><span class=\"btn btn-file\"><span><i class=\"fa fa-upload\"></i> Choose Image</span><input id=\"event_subimgfile\" type=\"file\" name=\"event_subimgfile[]\"></span></div>") +
@@ -427,43 +413,43 @@ function selectedFigure(figure) {
     $('#sidePanelTypeSelect').removeAttr('disabled');
     if (figure.userData.evt == "wait_for_element")
       $('#sidePanelTypeSelect').html(
-        "<option value='timer' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-timer-clock.png\"/>Timer</span>'>Timer</option>" +
-        "<option selected='selected' value='wait_for_element' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/page-view.png\"/>Wait For Element</span>'>Wait For Element</option>" +
-        "<option value='wait_for_title' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-title.png\"/>Wait For Title</span>'>Wait For Title</option>" +
-        "<option value='test_expression' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-equation.png\"/>Test Expression</span>'>Test Expression</option>" +
-        "<option value='wait_for_time' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-wall-clock.png\"/>Wait For Time</span>'>Wait For Time</option>"
+        "<option value='timer'>Timer</option>" +
+        "<option selected='selected' value='wait_for_element'>Wait For Element</option>" +
+        "<option value='wait_for_title'>Wait For Title</option>" +
+        "<option value='test_expression'>Test Expression</option>" +
+        "<option value='wait_for_time'>Wait For Time</option>"
       );
     else if (figure.userData.evt == "wait_for_title")
       $('#sidePanelTypeSelect').html(
-        "<option value='timer' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-timer-clock.png\"/>Timer</span>'>Timer</option>" +
-        "<option value='wait_for_element' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/page-view.png\"/>Wait For Element</span>'>Wait For Element</option>" +
-        "<option selected='selected' value='wait_for_title' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-title.png\"/>Wait For Title</span>'>Wait For Title</option>" +
-        "<option value='test_expression' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-equation.png\"/>Test Expression</span>'>Test Expression</option>" +
-        "<option value='wait_for_time' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-wall-clock.png\"/>Wait For Time</span>'>Wait For Time</option>"
+        "<option value='timer'>Timer</option>" +
+        "<option value='wait_for_element'>Wait For Element</option>" +
+        "<option selected='selected' value='wait_for_title'>Wait For Title</option>" +
+        "<option value='test_expression'>Test Expression</option>" +
+        "<option value='wait_for_time'>Wait For Time</option>"
       );
     else if (figure.userData.evt == "timer")
       $('#sidePanelTypeSelect').html(
-        "<option selected='selected' value='timer' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-timer-clock.png\"/>Timer</span>'>Timer</option>" +
-        "<option value='wait_for_element' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/page-view.png\"/>Wait For Element</span>'>Wait For Element</option>" +
-        "<option value='wait_for_title' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-title.png\"/>Wait For Title</span>'>Wait For Title</option>" +
-        "<option value='test_expression' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-equation.png\"/>Test Expression</span>'>Test Expression</option>" +
-        "<option value='wait_for_time' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-wall-clock.png\"/>Wait For Time</span>'>Wait For Time</option>"
+        "<option selected='selected' value='timer'>Timer</option>" +
+        "<option value='wait_for_element'>Wait For Element</option>" +
+        "<option value='wait_for_title'>Wait For Title</option>" +
+        "<option value='test_expression'>Test Expression</option>" +
+        "<option value='wait_for_time'>Wait For Time</option>"
       );
     else if (figure.userData.evt == "test_expression")
       $('#sidePanelTypeSelect').html(
-        "<option value='timer' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-timer-clock.png\"/>Timer</span>'>Timer</option>" +
-        "<option value='wait_for_element' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/page-view.png\"/>Wait For Element</span>'>Wait For Element</option>" +
-        "<option value='wait_for_title' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-title.png\"/>Wait For Title</span>'>Wait For Title</option>" +
-        "<option selected='selected' value='test_expression' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-equation.png\"/>Test Expression</span>'>Test Expression</option>" +
-        "<option value='wait_for_time' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-wall-clock.png\"/>Wait For Time</span>'>Wait For Time</option>"
+        "<option value='timer'>Timer</option>" +
+        "<option value='wait_for_element'>Wait For Element</option>" +
+        "<option value='wait_for_title'>Wait For Title</option>" +
+        "<option selected='selected' value='test_expression'>Test Expression</option>" +
+        "<option value='wait_for_time'>Wait For Time</option>"
       );
     else if (figure.userData.evt == "wait_for_time") {
       $('#sidePanelTypeSelect').html(
-        "<option value='timer' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-timer-clock.png\"/>Timer</span>'>Timer</option>" +
-        "<option value='wait_for_element' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/page-view.png\"/>Wait For Element</span>'>Wait For Element</option>" +
-        "<option value='wait_for_title' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-title.png\"/>Wait For Title</span>'>Wait For Title</option>" +
-        "<option value='test_expression' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-equation.png\"/>Test Expression</span>'>Test Expression</option>" +
-        "<option selected='selected' value='wait_for_time' data-content='<span class=\"user-item\"><img style=\"-webkit-border-radius: 0; border-radius: 0;\" src=\"/icons/dark-wall-clock.png\"/>Wait For Time</span>'>Wait For Time</option>"
+        "<option value='timer'>Timer</option>" +
+        "<option value='wait_for_element>Wait For Element</option>" +
+        "<option value='wait_for_title'>Wait For Title</option>" +
+        "<option value='test_expression'>Test Expression</option>" +
+        "<option selected='selected' value='wait_for_time'>Wait For Time</option>"
       );
     }
   }
