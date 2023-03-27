@@ -105,8 +105,8 @@ function calculateUsage() {
                       type: "pie",
                     },
                     size: {
-                      width: 156,
-                      height: 180,
+                      width: 350,
+                      height: 400,
                     },
                     label: {
                       show: false,
