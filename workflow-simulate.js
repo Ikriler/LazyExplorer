@@ -24,7 +24,7 @@ function doSuper() {
 }
 
 function defineCustoms() {
-    CustomNode = draw2d.shape.basic.Oval.extend({
+    CustomNode = draw2d.shape.basic.Rectangle.extend({
         NAME: "CustomNode",
         init: function (attr) {
             this._super(attr);
@@ -83,8 +83,8 @@ function defineCustoms() {
         init: function (width, height) {
             this._super(10, 10);
 
-            this.color = new draw2d.util.Color("#303030");
-            this.backgroundColor = new draw2d.util.Color("#888888");
+            this.color = new draw2d.util.Color("#000000");
+            this.backgroundColor = new draw2d.util.Color("#ffffff");
         }
     });
 

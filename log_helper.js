@@ -1,171 +1,171 @@
 var mappingData = {
     begin_recording: {
-        bgColor: '#56B558',
+        bgColor: '#98e4eb',
         event_type: 'Begin Recording',
         icon: 'runner.png'
     },
     end_recording: {
-        bgColor: '#FF6B6B',
+        bgColor: '#d96895',
         event_type: 'End Recording',
         icon: 'winner-runner-arriving-to-end-line.png',
         optbadge : 'Workflow'
     },
     setvar: {
-        bgColor: '#3FB8AF',
+        bgColor: '#e8e292',
         event_type: 'Set Variable',
         icon: 'equality-sign.png'
     },
     csvimport: {
-        bgColor: '#F7734F',
+        bgColor: '#5e57ad',
         event_type: 'CSV Import',
         icon: 'csv-file-format-extension.png',
         endoptbadge : true
     },
     tabchange: {
-        bgColor: '#9265C6',
+        bgColor: '#57ad81',
         event_type: 'New/Change Tab',
         icon: 'web-tabs.png',
         optbadge : 'Tabs'
     },
     tabremove: {
-        bgColor: '#8937B2',
+        bgColor: '#d99348',
         event_type: 'Remove Tab',
         icon: 'web-tabs.png'
     },
     tabswitch: {
-        bgColor: '#924FAD',
+        bgColor: '#9c5230',
         event_type: 'Switch Tabs',
         icon: 'web-tabs.png',
         endoptbadge : true
     },
     click: {
-        bgColor: '#556270',
+        bgColor: '#9c252b',
         event_type: 'Mouse Click',
         icon: 'cursor-1.png',
         optbadge : 'Mouse'
     },
     mousedown: {
-        bgColor: '#F9E666',
+        bgColor: '#9fe3a6',
         event_type: 'Mouse Down',
         icon: 'mouse-pointer.png'
     },
     mouseup: {
-        bgColor: '#76B8C9',
+        bgColor: '#117a6b',
         event_type: 'Mouse Up',
         icon: 'mouse-pointer.png'
     },
     mouseover: {
-        bgColor: '#E0DFB1',
+        bgColor: '#327a11',
         event_type: 'Mouse Over',
         icon: 'mouse-pointer.png'
     },
     mouseout: {
-        bgColor: '#A5A36C',
+        bgColor: '#327a11',
         event_type: 'Mouse Out',
         icon: 'mouse-pointer.png',
         endoptbadge : true
     },
     keypress: {
-        bgColor: '#C5E0DC',
+        bgColor: '#ebe8b0',
         event_type: 'Key Press',
         icon: 'keyboard-key-a.png',
         optbadge : 'Keyboard'
     },
     keydown: {
-        bgColor: '#5D97AF',
+        bgColor: '#ae5bb3',
         event_type: 'Key Down',
         icon: 'key-arrow-down.png'
     },
     keyup: {
-        bgColor: '#FC9D9A',
+        bgColor: '#584091',
         event_type: 'Key Up',
         icon: 'square-arrow-up.png',
         endoptbadge : true
     },
     input: {
-        bgColor: '#CBE86B',
+        bgColor: '#abc722',
         event_type: 'Data Input',
         icon: 'text-entry-box.png',
         optbadge : 'Input'
     },
     change: {
-        bgColor: '#98462A',
+        bgColor: '#5c0a23',
         event_type: 'Change',
         icon: 'change.png'
     },
     submit: {
-        bgColor: '#A46583',
+        bgColor: '#d696aa',
         event_type: 'Form Submit',
         icon: 'clicking-cursor.png',
         endoptbadge : true
     },
     clipboard_copy: {
-        bgColor: '#005F6B',
+        bgColor: '#634e54',
         event_type: 'Clipboard Copy',
         icon: 'copy-document.png',
         optbadge : 'Clipboard'
     },
     clipboard_cut: {
-        bgColor: '#008C9E',
+        bgColor: '#516f75',
         event_type: 'Clipboard Cut',
         icon: 'cut.png'
     },
     clipboard_paste: {
-        bgColor: '#00B4CC',
+        bgColor: '#517554',
         event_type: 'Clipboard Paste',
         icon: 'paste-from-clipboard.png',
         endoptbadge : true
     },
     subimage: {
-        bgColor: '#C47280',
+        bgColor: '#72728c',
         event_type: 'Find Image',
         icon: 'search-image.png'
     },
     screenshot: {
-        bgColor: '#7D7D7D',
+        bgColor: '#c693ed',
         event_type: 'Take Screenshot',
         icon: 'photo-camera.png',
         endoptbadge : true
     },
     scroll: {
-        bgColor: '#D9CEB2',
+        bgColor: '#643866',
         event_type: 'Page Scroll',
         icon: 'scroll-bar.png',
         optbadge : 'Other'
     },
     focusin: {
-        bgColor: '#4ECDC4',
+        bgColor: '#260d6b',
         event_type: 'Element Focus',
         icon: 'focus.png'
     },
     focusout: {
-        bgColor: '#F0A900',
+        bgColor: '#8a1329',
         event_type: 'Element Unfocus',
         icon: 'unfocus-wfcustom.png'
     },
     customjs: {
-        bgColor: '#D4B0D6',
+        bgColor: '#de2307',
         event_type: 'Custom Function',
         icon: 'js-document.png'
     },
     purgecookies: {
-        bgColor: '#7D3F32',
+        bgColor: '#13d168',
         event_type: 'Purge Cookies',
         icon: 'christmas-cookies.png'
     },
     setproxy: {
-        bgColor: '#EFA821',
+        bgColor: '#5ba87e',
         event_type: 'Set Proxy Settings',
         icon: 'cloud-computing.png'
     },
     select: {
-        bgColor: '#D95B43',
+        bgColor: '#365d8a',
         event_type: 'Text Select',
         icon: 'edit-line.png',
         endoptbadge : true
     },
     closewindow: {
-        bgColor: '#688C40',
+        bgColor: '#e37678',
         event_type: 'Close Window',
         icon: 'window-close.png',
         optbadge : 'Desktop Automation',

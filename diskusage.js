@@ -38,7 +38,7 @@ $("#setting-flush-event-log-workflow").click(function (e) {
     });
   });
 });
-$("#setting-reset-wildfire").click(function (e) {
+$("#setting-reset").click(function (e) {
   e.preventDefault();
   chrome.storage.local.clear(function () {
     chrome.runtime.reload();

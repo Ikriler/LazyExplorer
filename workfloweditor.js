@@ -785,7 +785,7 @@ function addNode(event) {
   var node = new CustomNode({ // can change Oval to Rectangle
     radius: 0,
     stroke: 3,
-    color: "#888888",
+    color: "#000000",
     resizeable: false,
     bgColor: bgColor,
     userData: event
@@ -982,22 +982,22 @@ function connCreate(sourcePort, targetPort, userData) {
     conn = new draw2d.Connection({
         router: router,
         outlineStroke: 0,
-        outlineColor: "#303030",
+        outlineColor: "#000000",
         stroke: 4,
-        color: "#888888",
+        color: "#000000",
         radius: 8,
         source: sourcePort,
         target: targetPort,
         userData: userData
     });
 
-    var arrow = new CustomArrow(10,10);
+    var arrow = new CustomArrow(5, 5);
     conn.setTargetDecorator(arrow);
     conn.on("dragEnter", function(emitter, event){
-        conn.attr({outlineColor:"#30ff30"});
+        conn.attr({outlineColor:"#000000"});
     });
     conn.on("dragLeave", function(emitter, event){
-        conn.attr({outlineColor:"#303030"});
+        conn.attr({outlineColor:"#000000"});
     });
 
     return conn;
