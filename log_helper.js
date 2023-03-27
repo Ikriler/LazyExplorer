@@ -11,7 +11,7 @@ var mappingData = {
         optbadge : 'Workflow'
     },
     setvar: {
-        bgColor: '#e8e292',
+        bgColor: '#524d43',
         event_type: 'Set Variable',
         icon: 'equality-sign.png'
     },
@@ -66,9 +66,9 @@ var mappingData = {
         endoptbadge : true
     },
     keypress: {
-        bgColor: '#ebe8b0',
+        bgColor: '#243447',
         event_type: 'Key Press',
-        icon: 'keyboard-key-a.png',
+        icon: 'keyboard-key-e.png',
         optbadge : 'Keyboard'
     },
     keydown: {
