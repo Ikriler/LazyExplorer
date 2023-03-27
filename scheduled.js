@@ -1,5 +1,4 @@
 import "./utils/consts.js";
-
 function formatDateLong(date) {
   try {
     var day = date.getDate();
@@ -111,9 +110,9 @@ function formatDateLong(date) {
               "    <td>" +
               repeat +
               "</td>" +
-              "    <td>Local Machine</td>" +
+              "   " +
               "    <td>" +
-              '        <a href="#" id="deleteschedule' +
+              '        <a class="btn btn-danger" href="#" id="deleteschedule' +
               (i + 1) +
               '">Delete</a>' +
               "    </td>" +
@@ -195,6 +194,14 @@ function populateScheduledTable() {
       // for safety only
       favorites = [];
     }
+
+    for(var f = 0; f < favorites.length; f++) {
+      var opt = document.createElement("option");
+      opt.setAttribute("value", f);
+      opt.innerHTML = favorites[f].name;
+      $('#scheduleWorkflow').append(opt);
+    }
+    
     chrome.storage.local.get("scheduled", function (result) {
       var scheduled = result.scheduled;
       if (!Array.isArray(scheduled)) {
@@ -238,6 +245,7 @@ function populateScheduledTable() {
           "December",
         ];
         var schDate = new Date(scheduled[i].date);
+
         schDate =
           monthNames[schDate.getMonth()] +
           " " +
@@ -245,13 +253,12 @@ function populateScheduledTable() {
           ", " +
           schDate.getFullYear() +
           " @ " +
-          (((schDate.getHours() + 11) % 12) + 1) +
+          (((schDate.getHours()))) +
           ":" +
           (schDate.getMinutes() > 9
             ? schDate.getMinutes()
             : "0" + schDate.getMinutes()) +
-          " " +
-          (schDate.getHours() >= 12 ? "PM" : "AM");
+          " ";
 
         if (
           scheduled[i].sunday === false ||
@@ -290,9 +297,9 @@ function populateScheduledTable() {
           "    <td>" +
           repeat +
           "</td>" +
-          "    <td>Local Machine</td>" +
+          "    " +
           "    <td>" +
-          '        <a href="#" id="deleteschedule' +
+          '        <a class="btn btn-danger" href="#" id="deleteschedule' +
           (i + 1) +
           '">Delete</a>' +
           "    </td>" +
@@ -355,15 +362,16 @@ $("#addScheduleSubmitButton").click(function () {
   }
 
   // TODO - Validate this
-  var date_split_1 = $("#scheduleDateTime").val().split(" ");
-  var date_split_2 = date_split_1[0].split("/");
+  var date_split_1 = $("#scheduleDateTime").val().split("T");
+  console.log(date_split_1);
+  var date_split_2 = date_split_1[0].split("-");
   var date_split_3 = date_split_1[1].split(":");
-  var hours = date_split_3[0] % 12;
-  if (date_split_1[2] == "PM") hours += 12;
+  var hours = date_split_3[0] % 24;
+  // if (date_split_1[2] == "PM") hours += 12;
   var date = new Date(
+    parseInt(date_split_2[0]),
+    parseInt(date_split_2[1]) - 1,
     parseInt(date_split_2[2]),
-    parseInt(date_split_2[0]) - 1,
-    parseInt(date_split_2[1]),
     parseInt(hours),
     parseInt(date_split_3[1])
   );

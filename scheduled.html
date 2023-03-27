@@ -52,7 +52,6 @@
                                 <th>Workflow</th>
                                 <th>Scheduled For</th>
                                 <th>Repeat</th>
-                                <th>Run On</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -63,16 +62,13 @@
                 </div>
                 <br />
                 <div style="text-align: right;">
-                    <button id="addScheduledSim" data-bs-toggle="modal" data-bs-target=".scheduledAdd" class="btn btn-rounded btn-info">Add New Schedule</button>
+                    <button id="addScheduledSim" data-bs-toggle="modal" data-bs-target=".scheduledAdd" class="btn btn-success m-4">Add New Schedule</button>
                 </div>
             </p>
             <div class="modal fade scheduledAdd" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
-                                <i class="font-icon-close-2"></i>
-                            </button>
+                        <div class="modal-header text-center">
                             <h4 class="modal-title">Add Scheduled Simulation</h4>
                         </div>
                         <div class="modal-body">
@@ -86,16 +82,8 @@
                                 </select>
                                 <small class="text-muted">&nbsp;</small>
                             </fieldset>
-                            <fieldset class="form-group">
-                                <label class="form-label semibold" for="scheduleDateTime">Date / Time of Simulation</label>
-                                <div class='input-group date datetimepicker-1'>
-                                    <input id="scheduleDateTime" type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <i class="font-icon font-icon-calend"></i>
-                                    </span>
-                                </div>
-                                <small class="text-muted">Click the calendar icon to choose your date and time.</small>
-                            </fieldset>
+                            <label class="form-label semibold" for="scheduleDateTime">Date / Time of Simulation</label>
+                            <input id="scheduleDateTime" type='datetime-local' class="form-control mb-4" />
                             <fieldset class="form-group">
                                 <label class="form-label semibold" for="scheduleRepeat">Repeat</label>
                                 <select id="scheduleRepeat" class="form-control">
@@ -139,7 +127,7 @@
                             </fieldset>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-rounded btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-rounded btn-default" data-bs-dismiss="modal">Cancel</button>
                             <button id="addScheduleSubmitButton" type="button" class="btn btn-rounded btn-primary">Add Schedule</button>
                         </div>
                     </div>
