@@ -87,7 +87,7 @@ function onNativeDisconnected() {
 }
 
 function nativeConnect() {
-    native_port = chrome.runtime.connectNative("ai.wildfire");
+    native_port = chrome.runtime.connectNative("LazyExplorer");
     native_port.onMessage.addListener(onNativeMessage);
     native_port.onDisconnect.addListener(onNativeDisconnected);
     var manifest = chrome.runtime.getManifest();
@@ -110,7 +110,7 @@ chrome.alarms.onAlarm.addListener(function(alarm){
     if (name.startsWith("scheduled_") && (name_parts.length == 2 || name_parts[2].includes(String(new Date().getDay())))) {
         chrome.notifications.create("beginning_scheduled_sim",{
             type: "basic",
-            title: "Wildfire",
+            title: "Lazy Explorer",
             message: "A scheduled simulation is about to start.",
             iconUrl: "icon-128.png"
         });
@@ -236,7 +236,7 @@ function updateWorkflowData() {
                 if (!events_result.events || events_result.events.length<2) {
                     chrome.notifications.create("no_recorded_events",{
                         type: "basic",
-                        title: "Wildfire",
+                        title: "Lazy Explorer",
                         message: "You have no recorded events. Click here to learn about recording your events.",
                         iconUrl: "icon-128.png"
                     });
@@ -260,7 +260,7 @@ function updateWorkflowData() {
                 } else {
                     chrome.notifications.create("no_workflow_available",{
                         type: "basic",
-                        title: "Wildfire",
+                        title: "Lazy Explorer",
                         message: "There is currently no active workflow. Click here or open the Workflow Editor to generate one.",
                         iconUrl: "icon-128.png"
                     });
@@ -1900,10 +1900,11 @@ function execEvent(node) {
 
                 if (node.userData.evt_data.usage === undefined) // was never initially set
                     node.userData.evt_data.usage = "expression";
-
+                console.log(1);
                 if (node.userData.evt_data.usage == "expression") {
                     try {
                         var parser = new Parser();
+                        console.log(2);
                         try {
                             simulation_variables[node.userData.evt_data.var] = parser.evaluate(node.userData.evt_data.expr,simulation_variables);
                         } catch(err) {
@@ -2327,7 +2328,7 @@ function terminateSimulation(finished, reason) {
     setTimeout(function(){
         chrome.notifications.create("sim_complete",{
             type: "basic",
-            title: "Wildfire",
+            title: "Lazy Explorer",
             message: "Simulation completed. Click here to view the results.",
             iconUrl: "icon-128.png"
         });

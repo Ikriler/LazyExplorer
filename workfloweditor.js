@@ -776,6 +776,7 @@ function addSection(label) {
   $('#section_name').focus();
 }
 
+//function for add Custom Node
 function addNode(event) {
   var bgColor = "#999999";
   if (mappingData[event.evt] !== undefined)
@@ -960,7 +961,7 @@ $('#simfileContainer').bind('change', function() {
         importJSON(e.target.result);
         chrome.notifications.create("",{
             type: "basic",
-            title: "Wildfire",
+            title: "Lazy Explorer",
             message: "Simulation Imported",
             iconUrl: "icon-128.png"
         });
@@ -1276,7 +1277,7 @@ function cloneSelection() {
         }
     });
 
-    $('#workflowsidepanel').attr('style','display: none;');
+    // $('#workflowsidepanel').attr('style','display: none;');
     canvas.setCurrentSelection([]);
     resetGridZ();
     saveToLocalStorage();

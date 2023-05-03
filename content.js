@@ -180,7 +180,7 @@ function processPath(elementPath) {
                 }
             }
             if (childIndex==null && elementPath[i]==document) {
-                ; // WTF
+                ;
             } else {
                 path.push({
                     uniqueId: null,
