@@ -454,10 +454,8 @@ function selectedFigure(figure) {
     }
   }
 
-  // Set details call
   $('#sidePanelEventDetails').html(getEventOptionsHtml(figure.userData));
 
-  // Setup select values properly
   if (figure.userData && figure.userData.evt_data) {
       if (figure.userData.evt_data.scheme) {
         $('#event_scheme').val(figure.userData.evt_data.scheme);
@@ -503,7 +501,6 @@ function selectedFigure(figure) {
           $('#urlFieldGroup').removeAttr("style");
       }
   }
-  // Listen for changes
   $('#sidePanelTypeSelect').change(function(){
     changeType();
   });
@@ -634,7 +631,7 @@ function setDetailListeners() {
   });
 
   $('#event_csvfile').on('change', function(change_detail) {
-    if ($('#event_csvfile').val() == "") return; // cleared file
+    if ($('#event_csvfile').val() == "") return;
 
     $("#event_csvfile").parse({
       config: {
@@ -661,7 +658,7 @@ function setDetailListeners() {
               $('#event_csvfile').val("");
             });
           } else {
-            console.log(results.errors); // TODO - Make this user visible
+            console.log(results.errors);
             swal({
                 title: "Error",
                 text: results.errors[0].message + "<small><br /><br /><b>Hint: </b>Ensure your file is a CSV and does not have a new line at the end of the file.</small>",
@@ -684,7 +681,7 @@ function setDetailListeners() {
   });
 
   $('#event_subimgfile').on('change', function(change_detail) {
-    if ($('#event_subimgfile').val() == "") return; // cleared file
+    if ($('#event_subimgfile').val() == "") return;
     var file = change_detail.target.files[0];
     var reader  = new FileReader();
     reader.addEventListener("load", function(){
@@ -775,15 +772,13 @@ function addSection(label) {
 
   $('#section_name').focus();
 }
-
-//function for add Custom Node
 function addNode(event) {
   var bgColor = "#999999";
   if (mappingData[event.evt] !== undefined)
     bgColor = mappingData[event.evt].bgColor;
   if (all_settings.directinputdefault && ["keyup","keydown","keypress","input","mouseup","mousedown","click"].includes(event.evt))
     event['useDirectInput'] = true;
-  var node = new CustomNode({ // can change Oval to Rectangle
+  var node = new CustomNode({
     radius: 0,
     stroke: 3,
     color: "#000000",
@@ -796,7 +791,6 @@ function addNode(event) {
     diameter: 7,
     bgColor: "#1E90FF"
   };
-  /* Order is important */
   var rightPort = new draw2d.HybridPort(portConfig);
   rightPort.setName("Right");
   node.addPort(rightPort,new draw2d.layout.locator.RightLocator());
@@ -860,7 +854,7 @@ function importJSON(json) {
         }
     }
 
-    setTimeout(function(){ // TODO: This is a dirty hack to avoid grid overlay on long loads
+    setTimeout(function(){ 
       resetGridZ();
     },1000);
 }
@@ -1005,7 +999,6 @@ function connCreate(sourcePort, targetPort, userData) {
 }
 
 $(window).load(function () {
-    /* Init Page */
     var width = window.innerWidth-110-400;
     var height = window.innerHeight-136;
 
@@ -1094,7 +1087,7 @@ function initCanvas() {
 function createNewWorkflowFromEvents(result) {
     var nodey;
 
-    if (result.events.length < 1) { // only happens on fresh install
+    if (result.events.length < 1) {
         result.events.push({
             evt: 'begin_recording',
             time: 0
@@ -1184,7 +1177,7 @@ function favoriteSwal() {
         chrome.storage.local.get('favorites', function (result) {
             chrome.storage.local.get('workflow', function (workflow) {
                 var favorites = result.favorites;
-                if (!Array.isArray(favorites)) { // for safety only
+                if (!Array.isArray(favorites)) { 
                     favorites = [];
                 }
 
@@ -1276,8 +1269,6 @@ function cloneSelection() {
             selection.add(newLink);
         }
     });
-
-    // $('#workflowsidepanel').attr('style','display: none;');
     canvas.setCurrentSelection([]);
     resetGridZ();
     saveToLocalStorage();
@@ -1327,12 +1318,11 @@ function scrollOverrides() {
       
     canvas.getWindowScrollTop =  $.proxy(function (x, y) {
       if (typeof pageYOffset != 'undefined') {
-        //most browsers except IE before #9      
         return pageYOffset;
       }
       else {
-        var B = document.body; //IE 'quirks'
-        var D = document.documentElement; //IE with doctype
+        var B = document.body; 
+        var D = document.documentElement; 
         D = (D.clientHeight) ? D : B;
         return D.scrollTop;
       }
@@ -1340,19 +1330,18 @@ function scrollOverrides() {
 
     canvas.getWindowScrollLeft =  $.proxy(function (x, y) {
       if (typeof pageXOffset != 'undefined') {
-        //most browsers except IE before #9
+
         return pageXOffset;
       }
       else {
-        var B = document.body; //IE 'quirks'
-        var D = document.documentElement; //IE with doctype
+        var B = document.body; 
+        var D = document.documentElement; 
         D = (D.clientHeight) ? D : B;
         return D.scrollLeft;
       }
     }, canvas);
 }
 
-/* From simulate */
 var message_port = chrome.runtime.connect({name: "sim"});
 send_message({action: "getstate"});
 message_port.onMessage.addListener(function(msg) {
@@ -1414,7 +1403,7 @@ function updateNodeProcessIcon(nodeid, status) {
 }
 
 function initWorkflowSimulation() {
-  if (!events || events.length<2) { // TODO: test events? eventually get rid of events requirement :/
+  if (!events || events.length<2) {
       swal({
           title: "No events found",
           text: "You haven't recorded any actions yet!",

@@ -65,13 +65,12 @@ function populateSimulations() {
                 simulations[i].node_details !== undefined &&
                 simulations[i].node_details.length > 0
             )
-                // is it a workflow?
                 stepcount = simulations[i].node_details.length - 2;
             else stepcount = simulations[i].events.length - 2;
             var logcount = simulations[i].log.length - 2;
 
             var percentile = Math.floor((logcount * 100) / stepcount);
-            percentile = Math.max(0, Math.min(percentile, 100)); // bounded for safety
+            percentile = Math.max(0, Math.min(percentile, 100)); 
 
             for (var j = 0; j < simulations[i].node_details.length; j++) {
                 if (
@@ -122,7 +121,6 @@ function deleteSimulation() {
             chrome.storage.local.get("simulations", function (result) {
                 var simulations = result.simulations.reverse();
                 if (!Array.isArray(events)) {
-                    // for safety only
                     events = [];
                 }
                 simulations.splice(i, 1);

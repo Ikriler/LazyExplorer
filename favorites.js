@@ -2,7 +2,7 @@ function populateFavoritesTable() {
     chrome.commands.getAll(function (setcommands) {
         chrome.storage.local.get('favorites', function (result) {
             var favorites = result.favorites;
-            if (!Array.isArray(favorites)) { // for safety only
+            if (!Array.isArray(favorites)) { 
                 favorites = [];
             }
 
@@ -167,7 +167,7 @@ function populateFavoritesTable() {
 
                             chrome.storage.local.get('scheduled', function (result) {
                                 var scheduled = result.scheduled;
-                                if (!Array.isArray(scheduled)) { // for safety only
+                                if (!Array.isArray(scheduled)) {
                                     scheduled = [];
                                 }
                                 for (var j=0; j<scheduled.length; j++) {

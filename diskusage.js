@@ -12,7 +12,6 @@ $("#setting-flush-favorites").click(function (e) {
     chrome.storage.local.get("scheduled", function (result) {
       var scheduled = result.scheduled;
       if (!Array.isArray(scheduled)) {
-        // for safety only
         scheduled = [];
       }
       for (var i = 0; i < scheduled.length; i++) {
@@ -22,8 +21,6 @@ $("#setting-flush-favorites").click(function (e) {
         }
       }
       chrome.storage.local.set({ scheduled: scheduled }, function () {
-        // populateFavoritesTable();
-        // populateScheduledTable();
         calculateUsage();
       });
     });
@@ -83,7 +80,7 @@ function calculateUsage() {
                     )
                   );
 
-                  $("#usage-chart").html(""); // clear chart if already exists
+                  $("#usage-chart").html(""); 
 
                   c3.generate({
                     bindto: "#usage-chart",

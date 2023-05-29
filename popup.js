@@ -25,7 +25,7 @@ function toggleRecording() {
                                 active: true,
                                 currentWindow: true
                             }, function(tabs) {
-                                if (tabs[0].url.startsWith("https://wildfire.ai/tour1_1")) {
+                                if (tabs[0].url.startsWith("https://lazyexp/tour1_1")) {
                                     chrome.tabs.executeScript(tabs[0].id,{
                                         code: "var s = document.createElement('script');s.textContent = 'stoppedRecording();';document.head.appendChild(s);"
                                     },function(){
@@ -73,12 +73,11 @@ function toggleRecording() {
                     evt_data: {}
                 });
                 chrome.storage.local.set({events: events},function(){
-                    /* Guide */
                     chrome.tabs.query({
                         active: true,
                         currentWindow: true
                     }, function(tabs) {
-                        if (tabs[0].url.startsWith("https://wildfire.ai/tour1_1")) {
+                        if (tabs[0].url.startsWith("https://lazyexp/tour1_1")) {
                             chrome.tabs.executeScript(tabs[0].id,{
                                 code: "var s = document.createElement('script');s.textContent = 'startedRecording();';document.head.appendChild(s);"
                             },function(){
@@ -125,7 +124,7 @@ var windowHeight = 800;
 
 window.onload = function() {
     document.getElementById('dashLink').onclick = function () {
-        if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+        if (typeof InstallTrigger === 'undefined') {
             chrome.tabs.query({
                 windowType: "popup"
             },function(tabs){

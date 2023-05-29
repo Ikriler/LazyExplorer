@@ -1,21 +1,14 @@
-
-
 var QueryString = function(){
-  // This function is anonymous, is executed immediately and 
-  // the return value is assigned to QueryString!
   var query_string = {};
   var query = window.location.search.substring(1);
   var vars = query.split("&");
   for (var i=0;i<vars.length;i++) {
     var pair = vars[i].split("=");
-        // If first entry with this name
     if (typeof query_string[pair[0]] === "undefined") {
       query_string[pair[0]] = decodeURIComponent(pair[1]);
-        // If second entry with this name
     } else if (typeof query_string[pair[0]] === "string") {
       var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
       query_string[pair[0]] = arr;
-        // If third or later entry with this name
     } else {
       query_string[pair[0]].push(decodeURIComponent(pair[1]));
     }
@@ -26,14 +19,10 @@ var QueryString = function(){
 var all_settings;
 chrome.storage.local.get('settings', function (settings) {
     all_settings = settings.settings;
-	
-	/* Sanity Checks */
 	if (all_settings === undefined)
 		return;
 	if (all_settings.recordscroll === undefined)
 		return;
-    
-    /* Main */
     if (all_settings.recordscroll) {
         window.addEventListener("scroll", function (e) {
             setTimeout(function () {
@@ -46,10 +35,10 @@ chrome.storage.local.get('settings', function (settings) {
         }, false);
     }
 
-    addDocumentEventListener("open"); // TODO - Figure this out
-    addDocumentEventListener("touchstart"); // TODO - Figure this out
-    addDocumentEventListener("propertychange"); // TODO - Figure this out
-    addDocumentEventListener("wfSubmit"); // TODO - Figure this out
+    addDocumentEventListener("open"); 
+    addDocumentEventListener("touchstart"); 
+    addDocumentEventListener("propertychange"); 
+    addDocumentEventListener("wfSubmit"); 
 
     if (all_settings.recordmousedown)
         addDocumentEventListener("mousedown");
@@ -201,7 +190,7 @@ function getCSSPath(el, ignoreIds) {
     while (el.nodeType === Node.ELEMENT_NODE) {
         var selector = el.nodeName.toLowerCase();
         if (el.id && !ignoreIds) {
-            selector += '#' + el.id.replace( /(:|\.|\[|\]|,)/g, "\\$1" ); // extra regex for css chars in id
+            selector += '#' + el.id.replace( /(:|\.|\[|\]|,)/g, "\\$1" );
             path.unshift(selector);
             break;
         } else {
@@ -277,8 +266,6 @@ var defaultOptions = {
     bubbles: true,
     cancelable: true
 }
-
-/* Start Scroll */
 var scrollTimer = null;
 var scrollObject = null;
 var scrollStartTime;
@@ -286,14 +273,14 @@ var scrollStartTop;
 var scrollStartLeft;
 
 function finishScrollEvent() {
-    scrollObject = document.body; // temp fix
+    scrollObject = document.body; 
 
     chrome.runtime.sendMessage({
         action: "addEvent",
         evt: "scroll",
         evt_data: {
-            bubbles: false, // TODO: Investigate
-            cancelable: false, // TODO: Investigate
+            bubbles: false, 
+            cancelable: false, 
             scrollTopStart: scrollStartTop,
             scrollTopEnd: scrollObject.scrollTop,
             scrollLeftStart: scrollStartLeft,
@@ -307,25 +294,23 @@ function finishScrollEvent() {
     });
 
     scrollObject = null;
-    scrollStartTop = null; // not necessary
-    scrollStartLeft = null; // not necessary
+    scrollStartTop = null; 
+    scrollStartLeft = null; 
 }
 
 function updateScrollEvent(e) {
-    // Designed to support multiple element scrolling event listeners
-
     var scrollTimeMillis = 100;
 
     if (scrollObject == null) {
         scrollStartTime = Date.now();
-        scrollObject = document.body; // e.target; temp removed
+        scrollObject = document.body;
         scrollStartTop = scrollObject.scrollTop;
         scrollStartLeft = scrollObject.scrollLeft;
         scrollTimer = setTimeout(finishScrollEvent, scrollTimeMillis);
     } else {
         clearTimeout(scrollTimer);
         scrollTimer = setTimeout(finishScrollEvent, scrollTimeMillis);
-    } // in theory, 2x concurrent scrolling, should be impossible but isn't
+    } 
 }
 
 function addDocumentEventListener(eventName) {

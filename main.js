@@ -703,7 +703,7 @@ function getNodeById(nodeid) {
 	return node;
 }
 
-if (typeof InstallTrigger !== 'undefined') { // Firefox
+if (typeof InstallTrigger !== 'undefined') {
     browser.runtime.onConnect.addListener(function(new_port) {
         port = new_port;
         if (port.name == "sim") {
@@ -797,11 +797,11 @@ function begin_fav_sim(fav_index, curr_window) {
             }
         }
 
-        setTimeout(function(node){ // allow time for simulation window to open
+        setTimeout(function(node){ 
             processEvent(node);
         }, 200, node);
     }).catch(function(){
-        ; // TODO: Better handling
+        ; 
     });
 }
 
@@ -836,23 +836,23 @@ function begin_sim_with_option(fav_index) {
 			"height":1080,
 			"incognito":incognito
 		};
-        if (typeof InstallTrigger === 'undefined') // NOT Firefox
+        if (typeof InstallTrigger === 'undefined') 
             window_options["focused"] = true;
 
 		chrome.windows.create(window_options, function(simulation_window) {
 			new_window = simulation_window;
 			if (bgSettings.runminimized) {
-				chrome.windows.update(new_window.id, { // https://bugs.chromium.org/p/chromium/issues/detail?id=459841
+				chrome.windows.update(new_window.id, { 
 					state: "minimized"
 				});
 			} else {
-                chrome.windows.update(new_window.id, { // https://bugs.chromium.org/p/chromium/issues/detail?id=459841
+                chrome.windows.update(new_window.id, { 
 					state: "maximized"
 				});
             }
 			
 			setTimeout(function(new_window){
-                if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+                if (typeof InstallTrigger === 'undefined') { 
                     chrome.tabs.query({windowId: new_window.id}, function(tabs){
                         for (var i=1; i<tabs.length; i++) {
                             chrome.tabs.remove(tabs[i].id);
@@ -868,10 +868,10 @@ function begin_sim_with_option(fav_index) {
 					reason: "run_timeout"
 				});
 				
-				terminateSimulation(false, "Global run timeout"); // TODO: Check
-            }, 60*60*1000*24); // 24 hours
+				terminateSimulation(false, "Global run timeout"); 
+            }, 60*60*1000*24); 
 			
-			chrome.windows.onRemoved.addListener(closeListenerCallback); // TODO: Check
+			chrome.windows.onRemoved.addListener(closeListenerCallback); 
 
             if (fav_index==-1) {
                 updateWorkflowData().then(function(){
@@ -884,10 +884,10 @@ function begin_sim_with_option(fav_index) {
                         }
                     }
 
-                    setTimeout(function(node){ // allow time for simulation window to open
+                    setTimeout(function(node){
                         if (events[1].evt != "tabchange" && events[1].evt_data.url && events[1].evt_data.url.length > 8) {
                             var initurl = events[1].evt_data.url;
-                            if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+                            if (typeof InstallTrigger === 'undefined') { 
                                 chrome.tabs.query({windowId: new_window.id}, function(tabs){
                                     chrome.tabs.update(tabs[0].id,{url: initurl});
                                 });
@@ -923,10 +923,10 @@ function begin_sim_with_option(fav_index) {
                         }
                     }
 
-                    setTimeout(function(node){ // allow time for simulation window to open
+                    setTimeout(function(node){ 
                         if (events[1].evt != "tabchange" && events[1].evt_data.url && events[1].evt_data.url.length > 8) {
                             var initurl = events[1].evt_data.url;
-                            if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+                            if (typeof InstallTrigger === 'undefined') { 
                                 chrome.tabs.query({windowId: new_window.id}, function(tabs){
                                     chrome.tabs.update(tabs[0].id,{url: initurl});
                                 });
@@ -976,7 +976,6 @@ function processEvent(node) {
 }
 
 function logResultAndRaceLinks(result, failure, node) {
-	// Process result
 	simulation_log.push(result);
 
 	if (node.userData.evt == "end_recording") {
@@ -1315,7 +1314,7 @@ function execEvent(node) {
                 if (node.userData.evt_data.downloadlinks)
                     code += "if ($('" + resolveVariable(node.userData.evt_data.csspath) + "').prop('tagName') == 'A'){ var downloadattrstatus = $('" + resolveVariable(node.userData.evt_data.csspath) + "').attr('download'); $('" + resolveVariable(node.userData.evt_data.csspath) + "').attr('download',''); };"
 
-                if (node.userData.evt_data.button == 1) { // middle click
+                if (node.userData.evt_data.button == 1) {
                     code += "$('" + resolveVariable(node.userData.evt_data.csspath) + "')[0].dispatchEvent(new MouseEvent(\"click\",{\"button\": 1, \"which\": 1}));";
                 } else {
                     code += "$('" + resolveVariable(node.userData.evt_data.csspath) + "')[0].click();";
@@ -1530,7 +1529,6 @@ function execEvent(node) {
                             
                             runCode(code, node).then(function(result){
                                 chrome.tabs.query({windowId: new_window.id, active: true}, function(tabs) {
-                                    // TODO - deal with period char
                                     if (result.results[0] == resolveVariable(node.userData.evt_data.value).slice(0, -1)) {
                                         chrome.debugger.attach({ tabId: tabs[0].id }, "1.0");
                                         chrome.debugger.sendCommand({ tabId: tabs[0].id }, 'Input.dispatchKeyEvent', { unmodifiedText: node.userData.evt_data.value[node.userData.evt_data.value.length-1], text: node.userData.evt_data.value[node.userData.evt_data.value.length-1], type: 'rawKeyDown', windowsVirtualKeyCode: (node.userData.evt_data.value[node.userData.evt_data.value.length-1].charCodeAt(0)=="." ? 190 : node.userData.evt_data.value[node.userData.evt_data.value.length-1].charCodeAt(0)), nativeVirtualKeyCode : (node.userData.evt_data.value[node.userData.evt_data.value.length-1].charCodeAt(0)=="." ? 190 : node.userData.evt_data.value[node.userData.evt_data.value.length-1].charCodeAt(0)), macCharCode: (node.userData.evt_data.value[node.userData.evt_data.value.length-1].charCodeAt(0)=="." ? 190 : node.userData.evt_data.value[node.userData.evt_data.value.length-1].charCodeAt(0))  });
@@ -1643,7 +1641,7 @@ function execEvent(node) {
                         if (resolveVariable(node.userData.evt_data.method) == "active") {
                             if (tabs[i].active) {
                                 removedTab = i;
-                                chrome.tabs.remove(tabs[removedTab].id); // wrap it so it can remove multiple tabs
+                                chrome.tabs.remove(tabs[removedTab].id); 
                             }
                         } else if (resolveVariable(node.userData.evt_data.method) == "url") {
                             if (tabs[i].url == resolveVariable(node.userData.evt_data.url)) {
@@ -1679,7 +1677,7 @@ function execEvent(node) {
                     });
                 }
 
-                if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+                if (typeof InstallTrigger === 'undefined') { 
                     chrome.tabs.query({windowId: new_window.id}, function(tabs){
                         removeTab(tabs);
                     });
@@ -1730,7 +1728,7 @@ function execEvent(node) {
                     });
                 }
 
-                if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+                if (typeof InstallTrigger === 'undefined') { 
                     chrome.tabs.query({windowId: new_window.id}, function(tabs){
                         switchTabs(tabs);
                     });
@@ -1773,7 +1771,7 @@ function execEvent(node) {
                     });
                 }
 
-                if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+                if (typeof InstallTrigger === 'undefined') {
                     chrome.tabs.query({windowId: new_window.id}, function(tabs){
                         changeActiveTab(tabs);
                     });
@@ -1898,7 +1896,7 @@ function execEvent(node) {
                         time: Date.now()
                     });
 
-                if (node.userData.evt_data.usage === undefined) // was never initially set
+                if (node.userData.evt_data.usage === undefined) 
                     node.userData.evt_data.usage = "expression";
                 console.log(1);
                 if (node.userData.evt_data.usage == "expression") {
@@ -2053,7 +2051,7 @@ function execEvent(node) {
                 }
             });
         default:
-            terminateSimulation(false, "Unknown event type: " + node.userData.evt); // TODO - check
+            terminateSimulation(false, "Unknown event type: " + node.userData.evt); 
             break;
     }
         
@@ -2102,11 +2100,10 @@ function runCodeFrameURLPrefix(code, node, urlprefix) {
 
                     code = "try { " + code + "; } catch(err) { new Object({error: err.message, errorstack: err.stack}); }";
 
-                    if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+                    if (typeof InstallTrigger === 'undefined') { 
                         chrome.tabs.executeScript(tabs[activeTab].id,{
                             code: code,
                             frameId: frameId,
-                            //allFrames: true,
                             matchAboutBlank: true
                         }, function(results){
                             if (results && results.length==1 && ((results[0]!==null && !results[0].error) || results[0]===null)) {
@@ -2117,7 +2114,6 @@ function runCodeFrameURLPrefix(code, node, urlprefix) {
                                     time: Date.now()
                                 });
                             } else {
-                                // Check for and handle special errors here
                                 reject({
                                     error: true,
                                     results: results,
@@ -2130,7 +2126,6 @@ function runCodeFrameURLPrefix(code, node, urlprefix) {
                         browser.tabs.executeScript(tabs[activeTab].id,{
                             code: code,
                             frameId: frameId,
-                            //allFrames: true,
                             matchAboutBlank: true
                         }).then(function(results){
                             if (results && results.length==1 && ((results[0]!==null && !results[0].error) || results[0]===null))
@@ -2188,9 +2183,9 @@ function waitForTime(resolve, time, returnvar) {
         if (!b) return;
 
         var d = new Date();
-        d.setHours(b[0]>12? b[0] : b[0]%12 + (/p/i.test(time)? 12 : 0), // hours
-             /\d/.test(b[1])? b[1] : 0,     // minutes
-             /\d/.test(b[2])? b[2] : 0);    // seconds
+        d.setHours(b[0]>12? b[0] : b[0]%12 + (/p/i.test(time)? 12 : 0), 
+             /\d/.test(b[1])? b[1] : 0,     
+             /\d/.test(b[2])? b[2] : 0);    
         
         if (d.toTimeString() == new Date().toTimeString())
             resolve(returnvar);
@@ -2209,7 +2204,7 @@ function waitForTitle(resolve, expected_title, returnvar) {
 					}
 					chrome.tabs.executeScript(tabs[activeTab].id,{
 						code: "document.title",
-						frameId: 0, // TODO - frame support
+						frameId: 0, 
 						matchAboutBlank: true
 					}, function(results){
 						if (results && results[0] && results[0]==expected_title)
@@ -2218,7 +2213,7 @@ function waitForTitle(resolve, expected_title, returnvar) {
 				} catch(err) {;}
             }
 
-            if (typeof InstallTrigger === 'undefined') { // NOT Firefox
+            if (typeof InstallTrigger === 'undefined') { 
                 chrome.tabs.query({windowId: new_window.id}, function(tabs){
                     waitForTitleInActiveTab(tabs);
                 });
@@ -2319,7 +2314,7 @@ function terminateSimulation(finished, reason) {
             "passwords": true,
             "webSQL": true
         }, function() {
-            ;//console.log("Finished clearing browsing history");
+            ;
         });
     }
 	
@@ -2346,7 +2341,7 @@ function terminateSimulation(finished, reason) {
         }, function(imagedata){
             chrome.storage.local.get('simulations', function (result) {
                 var simulations = result.simulations;
-                if (!Array.isArray(simulations)) { // for safety only
+                if (!Array.isArray(simulations)) { 
                     simulations = [];
                 }
                 simulations.push({
@@ -2376,7 +2371,7 @@ function terminateSimulation(finished, reason) {
     } catch(err) {
         chrome.storage.local.get('simulations', function (result) {
             var simulations = result.simulations;
-            if (!Array.isArray(simulations)) { // for safety only
+            if (!Array.isArray(simulations)) { 
                 simulations = [];
             }
             simulations.push({

@@ -12,13 +12,11 @@ function formatDateLong(date) {
       chrome.storage.local.get("favorites", function (result) {
         var favorites = result.favorites;
         if (!Array.isArray(favorites)) {
-          // for safety only
           favorites = [];
         }
         chrome.storage.local.get("scheduled", function (result) {
           var scheduled = result.scheduled;
           if (!Array.isArray(scheduled)) {
-            // for safety only
             scheduled = [];
           }
 
@@ -191,7 +189,6 @@ function populateScheduledTable() {
   chrome.storage.local.get("favorites", function (result) {
     var favorites = result.favorites;
     if (!Array.isArray(favorites)) {
-      // for safety only
       favorites = [];
     }
 
@@ -205,7 +202,6 @@ function populateScheduledTable() {
     chrome.storage.local.get("scheduled", function (result) {
       var scheduled = result.scheduled;
       if (!Array.isArray(scheduled)) {
-        // for safety only
         scheduled = [];
       }
 
@@ -360,14 +356,11 @@ $("#addScheduleSubmitButton").click(function () {
     swal("Error", "You must set the Date / Time of Simulation field", "error");
     return;
   }
-
-  // TODO - Validate this
   var date_split_1 = $("#scheduleDateTime").val().split("T");
   console.log(date_split_1);
   var date_split_2 = date_split_1[0].split("-");
   var date_split_3 = date_split_1[1].split(":");
   var hours = date_split_3[0] % 24;
-  // if (date_split_1[2] == "PM") hours += 12;
   var date = new Date(
     parseInt(date_split_2[0]),
     parseInt(date_split_2[1]) - 1,
@@ -379,7 +372,6 @@ $("#addScheduleSubmitButton").click(function () {
   chrome.storage.local.get("scheduled", function (result) {
     var scheduled = result.scheduled;
     if (!Array.isArray(scheduled)) {
-      // for safety only
       scheduled = [];
     }
 

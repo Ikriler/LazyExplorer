@@ -226,10 +226,7 @@ function formatDiffDate(starttime,endtime) {
 }
 
 function readableEventDetail(event, simulation_log_results) {
-    /* Event Time */
     var event_time = ((event.time-recording_start_time)/1000).toFixed(2) + "s";
-
-    /* Event Type and Details */
     var event_type = "";
     var event_data = "";
     var minorEvent = true;
@@ -537,7 +534,6 @@ function readableEventDetail(event, simulation_log_results) {
         }
     }
 
-    /* Event URL */
     var event_url = false;
     if (event.evt_data && event.evt_data.url) {
         event_url = event.evt_data.url;
@@ -561,7 +557,7 @@ function populateEvents(result) {
     var events = result.events;
     var simulation_log = result.log;
     var rows_height = 0;
-    document.getElementById('events').innerHTML = ""; // reset table
+    document.getElementById('events').innerHTML = "";
 
     if (!events || events == null || events.length<1) {
         var eventNode = document.createElement("tr");
@@ -582,7 +578,7 @@ function populateEvents(result) {
             event_details = readableEventDetail(events[i], null);
 
         var innerHTML = "<!--" + JSON.stringify(events[i]) + "-->";
-        if (simulation_log) { // Result in simulation log
+        if (simulation_log) { 
             if (simulation_log.length > i) {
                 if (!simulation_log[i].results || simulation_log[i].results.length==1) {
                     if (!simulation_log[i].results || !simulation_log[i].results[0].error)
@@ -623,7 +619,7 @@ function populateSimulationEvents(result) {
     var events = result.events;
     var simulation_log = result.log;
     var rows_height = 0;
-    document.getElementById('events').innerHTML = ""; // reset table
+    document.getElementById('events').innerHTML = ""; 
 
     recording_start_time = events[0].time;
 
@@ -635,7 +631,7 @@ function populateSimulationEvents(result) {
             }
         }
         var innerHTML = "";
-        if (simulation_log) { // Result in simulation log
+        if (simulation_log) { 
             if (simulation_log.length > i) {
                 if (!simulation_log[i].results || simulation_log[i].results.length==1) {
                     if (!simulation_log[i].results || !simulation_log[i].results[0] || !simulation_log[i].results[0].error)
